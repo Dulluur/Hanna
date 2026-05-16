@@ -1,0 +1,364 @@
+# Тестовый набор заведений г. Якутска (выдуманные, для демо MVP).
+# Координаты — приблизительно центр города (62.02–62.05, 129.70–129.78).
+# Коды справочников см. в init.sql (categories, cuisines, diet_tags, amenity_tags, price_bands).
+
+# ====================== P4 — премиум (3000–10000 ₽) ======================
+
+- name: Тыгын Дархан
+  description: Ресторан гостиницы с национальной якутской кухней и видом на город.
+  address: пр. Ленина, 5
+  latitude: 62.0282
+  longitude: 129.7300
+  category: restaurant
+  price_band: P4
+  cuisines: [yakut, european]
+  diet_tags: [kids_menu]
+  amenities: [wifi, parking, private_room, wheelchair]
+  rating_2gis: 4.7
+  upsell_highlights:
+    - Живая музыка по выходным
+    - Авторская подача строганины
+    - Панорамный зал на 12 этаже
+  phone: "+7 4112 43-50-50"
+  website: https://example.com/tygyn
+  work_hours: "08:00-23:00"
+
+- name: Эһэ-Хайа
+  description: Премиум-ресторан в этно-стиле, вид на Лену.
+  address: ул. Ярославского, 12
+  latitude: 62.0298
+  longitude: 129.7411
+  category: restaurant
+  price_band: P4
+  cuisines: [yakut]
+  diet_tags: [gluten_free]
+  amenities: [terrace, parking, private_room, wifi]
+  rating_2gis: 4.9
+  upsell_highlights:
+    - Веранда с видом на Лену
+    - Дегустационное меню от шефа
+    - Винная карта 80+ позиций
+  phone: "+7 4112 21-10-10"
+  website: https://example.com/ehekhaya
+  work_hours: "12:00-00:00"
+
+- name: Le Petit
+  description: Французская кухня, авторские десерты, камерный зал.
+  address: ул. Орджоникидзе, 28
+  latitude: 62.0259
+  longitude: 129.7355
+  category: restaurant
+  price_band: P4
+  cuisines: [european, italian]
+  diet_tags: [vegetarian, gluten_free]
+  amenities: [wifi, private_room]
+  rating_2gis: 4.8
+  upsell_highlights:
+    - Шеф со стажировкой в Лионе
+    - Сет из 7 курсов
+    - Дегустация сыров
+  phone: "+7 4112 33-77-88"
+  work_hours: "16:00-00:00"
+
+# ====================== P3 — средний+ (1500–3000 ₽) ======================
+
+- name: Махтал
+  description: Якутская и европейская кухня в центре города.
+  address: ул. Кирова, 18
+  latitude: 62.0276
+  longitude: 129.7322
+  category: restaurant
+  price_band: P3
+  cuisines: [yakut, european]
+  diet_tags: [kids_menu]
+  amenities: [wifi, terrace, kids_zone, parking]
+  rating_2gis: 4.6
+  upsell_highlights:
+    - Живая музыка по выходным
+    - Авторская подача якутских блюд
+    - Просторная веранда
+  phone: "+7 4112 35-21-18"
+  website: https://example.com/mahtal
+  work_hours: "11:00-23:00"
+
+- name: Уруу
+  description: Современная якутская кухня в этно-интерьере.
+  address: ул. Дзержинского, 7
+  latitude: 62.0301
+  longitude: 129.7298
+  category: restaurant
+  price_band: P3
+  cuisines: [yakut]
+  diet_tags: [kids_menu, lent]
+  amenities: [wifi, kids_zone, private_room]
+  rating_2gis: 4.7
+  upsell_highlights:
+    - Шеф — финалист "Лучший повар Якутии"
+    - Меню на основе локальных продуктов
+    - Детская комната с аниматором
+  phone: "+7 4112 22-11-22"
+  work_hours: "11:00-23:00"
+
+- name: Чочур-Муран
+  description: Загородный ресторан-усадьба с традиционной кухней.
+  address: Вилюйский тракт, 6 км
+  latitude: 62.0455
+  longitude: 129.6921
+  category: restaurant
+  price_band: P3
+  cuisines: [yakut, russian]
+  diet_tags: [kids_menu]
+  amenities: [parking, terrace, kids_zone, pet_friendly]
+  rating_2gis: 4.8
+  upsell_highlights:
+    - Музей быта прямо в ресторане
+    - Катание на лошадях зимой
+    - Большая открытая площадка
+  phone: "+7 4112 36-50-55"
+  website: https://example.com/chochur
+  work_hours: "12:00-23:00"
+
+- name: Sushi Yamato
+  description: Японский ресторан с суши-баром и роллами.
+  address: пр. Ленина, 33
+  latitude: 62.0290
+  longitude: 129.7340
+  category: restaurant
+  price_band: P3
+  cuisines: [japanese, asian]
+  diet_tags: [vegetarian, lactose_free]
+  amenities: [wifi, kids_menu, private_room]
+  rating_2gis: 4.5
+  upsell_highlights:
+    - Сет от шеф-повара
+    - Свежая рыба прямой поставкой
+  phone: "+7 4112 44-22-11"
+  work_hours: "12:00-00:00"
+
+- name: Сайгон
+  description: Вьетнамская и паназиатская кухня.
+  address: ул. Лермонтова, 25
+  latitude: 62.0312
+  longitude: 129.7405
+  category: restaurant
+  price_band: P3
+  cuisines: [asian, chinese]
+  diet_tags: [vegan, vegetarian, halal]
+  amenities: [wifi, kids_zone]
+  rating_2gis: 4.4
+  upsell_highlights:
+    - Большое веганское меню
+    - Острая кухня по аутентичным рецептам
+  phone: "+7 4112 50-30-30"
+  work_hours: "11:00-23:00"
+
+- name: Bar Flamingo
+  description: Бар с европейским меню и трансляциями спортивных матчей.
+  address: ул. Петра Алексеева, 14
+  latitude: 62.0245
+  longitude: 129.7388
+  category: bar
+  price_band: P3
+  cuisines: [european, mixed]
+  diet_tags: []
+  amenities: [wifi, live_music, terrace]
+  rating_2gis: 4.3
+  upsell_highlights:
+    - Крафтовое пиво 20+ сортов
+    - Трансляции матчей в HD
+    - DJ-сеты по пятницам
+  phone: "+7 924 100-22-33"
+  work_hours: "16:00-02:00"
+
+- name: Лофт 14
+  description: Бар-ресторан в индустриальном стиле, регулярные ивенты.
+  address: ул. Аммосова, 14
+  latitude: 62.0267
+  longitude: 129.7351
+  category: bar
+  price_band: P3
+  cuisines: [mixed, european]
+  diet_tags: [vegetarian]
+  amenities: [wifi, live_music]
+  rating_2gis: 4.5
+  upsell_highlights:
+    - Квизы по средам
+    - Стендап-вечера по четвергам
+    - Авторские коктейли
+  phone: "+7 924 555-14-14"
+  website: https://example.com/loft14
+  work_hours: "17:00-02:00"
+
+- name: Bistro Nord
+  description: Бистро с европейским меню и сезонной картой.
+  address: ул. Октябрьская, 20
+  latitude: 62.0255
+  longitude: 129.7299
+  category: restaurant
+  price_band: P3
+  cuisines: [european]
+  diet_tags: [vegetarian, gluten_free]
+  amenities: [wifi]
+  rating_2gis: 4.2
+  upsell_highlights:
+    - Сезонное меню каждые 2 месяца
+    - Бизнес-ланч из 4 курсов
+  phone: "+7 4112 31-31-31"
+  work_hours: "10:00-23:00"
+
+# ====================== P2 — средний (500–1500 ₽) ======================
+
+- name: Точка Кофе
+  description: Спешелти-кофейня с десертами и завтраками.
+  address: пр. Ленина, 22
+  latitude: 62.0285
+  longitude: 129.7330
+  category: coffee
+  price_band: P2
+  cuisines: [european]
+  diet_tags: [vegetarian, vegan, lactose_free]
+  amenities: [wifi]
+  rating_2gis: 4.7
+  upsell_highlights:
+    - Зерно от российских обжарщиков
+    - Альтернативное молоко без доплаты
+  phone: "+7 924 222-22-22"
+  work_hours: "08:00-22:00"
+
+- name: Cup Story
+  description: Уютная кофейня с большим выбором завтраков.
+  address: ул. Кирова, 9
+  latitude: 62.0271
+  longitude: 129.7314
+  category: coffee
+  price_band: P2
+  cuisines: [european]
+  diet_tags: [vegetarian, kids_menu]
+  amenities: [wifi, kids_zone]
+  rating_2gis: 4.6
+  upsell_highlights:
+    - Завтраки до 14:00
+    - Детский уголок с книгами
+  phone: "+7 924 111-11-11"
+  work_hours: "08:00-22:00"
+
+- name: Pelmen Bar
+  description: Кафе-пельменная с авторскими начинками.
+  address: ул. Ярославского, 30
+  latitude: 62.0303
+  longitude: 129.7437
+  category: cafe
+  price_band: P2
+  cuisines: [russian, mixed]
+  diet_tags: [kids_menu, lent]
+  amenities: [wifi, kids_zone]
+  rating_2gis: 4.4
+  upsell_highlights:
+    - 12 видов пельменей собственной лепки
+    - Постные начинки
+  phone: "+7 924 333-33-33"
+  work_hours: "11:00-22:00"
+
+- name: Бао-Бао
+  description: "Стрит-фуд из Азии: бао, лапша, поке."
+  address: пр. Ленина, 50
+  latitude: 62.0299
+  longitude: 129.7352
+  category: cafe
+  price_band: P2
+  cuisines: [asian, chinese]
+  diet_tags: [vegan, vegetarian]
+  amenities: [wifi]
+  rating_2gis: 4.5
+  upsell_highlights:
+    - Веганские бао на пару
+    - Свежая лапша ручной работы
+  phone: "+7 924 444-44-44"
+  work_hours: "11:00-22:00"
+
+- name: Pizzeria Roma
+  description: Пиццерия с тонкой неаполитанской пиццей.
+  address: ул. Орджоникидзе, 15
+  latitude: 62.0263
+  longitude: 129.7361
+  category: cafe
+  price_band: P2
+  cuisines: [italian, european]
+  diet_tags: [vegetarian, kids_menu]
+  amenities: [wifi, kids_zone, kids_menu]
+  rating_2gis: 4.3
+  upsell_highlights:
+    - Печь на дровах
+    - Тесто 48 часов брожения
+  phone: "+7 924 555-55-55"
+  work_hours: "11:00-23:00"
+
+# ====================== P1 — бюджет (0–500 ₽) ======================
+
+- name: Столовая №1
+  description: Городская столовая с обедами по будням.
+  address: ул. Дзержинского, 21
+  latitude: 62.0309
+  longitude: 129.7287
+  category: canteen
+  price_band: P1
+  cuisines: [russian, mixed]
+  diet_tags: [kids_menu, lent]
+  amenities: [wheelchair]
+  rating_2gis: 4.1
+  upsell_highlights:
+    - Комплексный обед 250 ₽
+    - Постный стол по средам
+  phone: "+7 4112 12-34-56"
+  work_hours: "09:00-19:00"
+
+- name: Pelmen House
+  description: Сетевая пельменная навынос и в зале.
+  address: пр. Ленина, 8
+  latitude: 62.0273
+  longitude: 129.7325
+  category: fastfood
+  price_band: P1
+  cuisines: [russian]
+  diet_tags: [kids_menu]
+  amenities: []
+  rating_2gis: 4.0
+  upsell_highlights:
+    - Заморозка домашняя
+    - Семейная упаковка 1 кг
+  phone: "+7 924 666-66-66"
+  work_hours: "10:00-22:00"
+
+- name: Хот-Дог Стейшн
+  description: Хот-доги, бургеры, картофель фри.
+  address: ул. Лермонтова, 5
+  latitude: 62.0317
+  longitude: 129.7398
+  category: fastfood
+  price_band: P1
+  cuisines: [european, mixed]
+  diet_tags: []
+  amenities: [wifi]
+  rating_2gis: 3.9
+  upsell_highlights:
+    - 10 авторских топингов
+    - Ланчи до 200 ₽
+  phone: "+7 924 777-77-77"
+  work_hours: "10:00-23:00"
+
+- name: Сэндвич точка
+  description: Свежие сэндвичи и салаты на вынос.
+  address: ул. Кирова, 1
+  latitude: 62.0270
+  longitude: 129.7308
+  category: fastfood
+  price_band: P1
+  cuisines: [european]
+  diet_tags: [vegetarian, vegan]
+  amenities: [wifi]
+  rating_2gis: 4.2
+  upsell_highlights:
+    - Хлеб собственной выпечки
+    - Веганские сэндвичи
+  phone: "+7 924 888-88-88"
+  work_hours: "08:00-20:00"

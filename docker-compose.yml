@@ -1,0 +1,57 @@
+services:
+  db:
+    image: postgres:16
+    container_name: hanna_db
+    environment:
+      POSTGRES_USER: hanna
+      POSTGRES_PASSWORD: hanna
+      POSTGRES_DB: hanna
+    ports:
+      - "5432:5432"
+    volumes:
+      - hanna_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hanna -d hanna"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: hanna_backend
+    environment:
+      DATABASE_URL: postgresql+asyncpg://hanna:hanna@db:5432/hanna
+      ADMIN_USER: admin
+      ADMIN_PASSWORD: admin
+      ENV: development
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - hanna_uploads:/app/uploads
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: hanna_frontend
+    environment:
+      VITE_API_BASE_URL: http://localhost:8000
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    command: npm run dev -- --host
+
+volumes:
+  hanna_db_data:
+  hanna_uploads:
