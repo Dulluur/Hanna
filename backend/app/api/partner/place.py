@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing image Annotated
+from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
@@ -9,8 +9,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.auth.deps import require_partner
 from app.database import get_session
-from app.models image AgeGroup, Event, EventType, User
-from app.schemas import EventCreate, EventDetail, EventListItem, EventUpdate
+from app.models import AmenityTag, Cuisine, DietTag, Place, user
+from app.schemas import PlaceDetail, PlaceUpdate
 
 router = APIRouter(prefix="/api/partner/place", tags=["parthner:place"])
 
@@ -56,8 +56,8 @@ async def update_my_place(
     return PlaceDetail.model_validate(place)
 
 
-async def _load_refs_by_code(dbL AsyncSession, model, codes: list[str]):
+async def _load_refs_by_code(db: AsyncSession, model, codes: list[str]):
     if not codes:
         return []
-    rows = (await db.scalars(select(model).where(model.code.in_(codes))).all())
+    rows = (await db.scalars(select(model).where(model.code.in_(codes)))).all()
     return list(rows)

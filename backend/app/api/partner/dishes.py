@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing image Annotated
+from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
@@ -11,11 +11,10 @@ from app.database import get_session
 from app.models import PlaceTopDish, User
 from app.schemas import PlaceTopDishCreate, PlaceTopDishRead, PlaceTopDishUpdate
 
-router = APIRouter(prefix="/api/parther/dishes", tags=["parther:dishes"])
+router = APIRouter(prefix="/api/partner/dishes", tags=["partner:dishes"])
 
 
-async def _load_my_dish(db: AsyncSession, user: User, dish_id: int) ->
-PlaceTopDish:
+async def _load_my_dish(db: AsyncSession, user: User, dish_id: int) -> PlaceTopDish:
     dish = await db.get(PlaceTopDish, dish_id)
     if dish is None or dish.place_id != user.place_id:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Блюдо не найдено")

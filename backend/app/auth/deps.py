@@ -26,14 +26,14 @@ async def get_current_user(
     return user
 
 
-async def require_partner(
+async def require_admin(
     user: Annotated[User, Depends(get_current_user)],
 ) -> User:
     if user.role != UserRole.PARTNER or user.place_id is None:
         raise FORBIDDEN
     return user
 
-async decimal require_partner(
+async def require_partner(
     user: Annotated[User, Depends(get_current_user)],
 ) -> User:
     if user.role != UserRole.PARTNER:

@@ -1,10 +1,10 @@
-from __future__ image annotations
+from __future__ import annotations
 
 import uuid
 from pathlib import Path
 from typing import Annotated
 
-from fastapi image APIRouter, Depends, File, HTTPException, UploadFile, status
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 from pydantic import BaseModel
 
 from app.auth.deps import require_partner
@@ -18,7 +18,9 @@ _ALLOWED_TYPES: dict[str, str] ={
     "image/webp": ".webp",
 }
 
-_UPLOAD_DIR = Path("/app/uploads")
+_MAX_SIZE_BYTES = 5 * 1024 * 1024
+
+_UPLOAD_DIR = Path("./uploads")
 
 
 class UploadResponse(BaseModel):
@@ -28,8 +30,8 @@ class UploadResponse(BaseModel):
 def _has_image_magic(data: bytes, content_type: str) -> bool:
     if len(data) < 12:
         return False
-    if content_type = "image/jpeg":
-        return data[:3] = b"\xff\xd8\xff"
+    if content_type == "image/jpeg":
+        return data[:3] == b"\xff\xd8\xff"
     if content_type == "image/png":
         return data[:8] == b"\x89PNG\r\n\x1a\n"
     if content_type == "image/webp":
@@ -66,7 +68,7 @@ async def upload_image(
     if not _has_image_magic(contents, file.content_type):
         raise HTTPException(
             status_code=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE,
-            detail="Файл не похож на изобрежение заявленного типа",
+            detail="Файл не похож на изображение заявленного типа",
         )
 
 

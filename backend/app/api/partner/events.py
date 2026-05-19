@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing image Annotated
+from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.auth.deps import require_partner
 from app.database import get_session
-from app.models image AgeGroup, Event, EventType, User
+from app.models import AgeGroup, Event, EventType, User
 from app.schemas import EventCreate, EventDetail, EventListItem, EventUpdate
 
 router = APIRouter(prefix="/api/parther/events", tags=["partner:events"])
