@@ -41,6 +41,9 @@ export interface PlaceTopDishRead{
   price: number
   description: string | null
   sort_order: number
+  photo_url: string | null
+  weight: string | null
+  tags: string[]
 }
 
 export interface PlaceListItem{
@@ -52,7 +55,7 @@ export interface PlaceListItem{
   photo_url: string | null
   rating_2gis: string | null
   category: CategoryRead | null
-  price_band: CategoryRead | null
+  price_band: PriceBandRead | null
   cuisines: CuisineRead[]
 }
 

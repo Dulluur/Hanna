@@ -7,7 +7,7 @@ interface DietTagsState {
   clearDefaultTags: () => void
 }
 
-export const userDietTagsStore = create<DietTagsState>()(
+export const useDietTagsStore = create<DietTagsState>()(
   persist(
     (set) => ({
       defaultTags: [],
