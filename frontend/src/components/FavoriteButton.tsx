@@ -1,7 +1,8 @@
-import { userFavoritesStore } from '@/store/favorites'
+import { useFavoritesStore  } from '@/store/favorites'
 import { Heart } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+
 
 interface Props{
   kind: 'place' | 'event'
@@ -9,11 +10,13 @@ interface Props{
   className?: string
 }
 
+
 export function FavoriteButton({kind, id, className}: Props){
-  const isFav = userFavoritesStore((s) =>
+  const isFav = useFavoritesStore ((s) =>
     kind === 'place' ? s.isPlaceFavorite(id) : s.isEventFavorite(id),
   )
-  const toggle = userFavoritesStore((s) => (kind === 'place' ? s.togglePlace : s.toggleEvent))
+  const toggle = useFavoritesStore ((s) => (kind === 'place' ? s.togglePlace : s.toggleEvent))
+
 
   return(
     <Button

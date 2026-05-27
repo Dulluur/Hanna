@@ -90,10 +90,15 @@ AGE_GROUPS = [
 ]
 
 PRICE_BANDS = [
-    ('P1', '₽', 0, 500),
-    ('P2', '₽₽', 500, 1500),
-    ('P3', '₽₽₽', 1500, 3000),
-    ('P4', '₽₽₽₽', 3000, 10000),
+    ('P1', '₽',      0,    300),
+    ('P2', '₽₽',    300,   550),
+    ('P3', '₽₽',    550,   750),
+    ('P4', '₽₽₽',   750,   950),
+    ('P5', '₽₽₽',   950,  1150),
+    ('P6', '₽₽₽',  1150,  1400),
+    ('P7', '₽₽₽₽', 1400,  1700),
+    ('P8', '₽₽₽₽', 1700,  2200),
+    ('P9', '₽₽₽₽₽', 2200, 15000),
 ]
 
 
@@ -167,8 +172,8 @@ async def seed_places(session: AsyncSession) -> int:
         )
         session.add(place)
 
-        print(f"[seed] places: загружено {len(data)}")
-        return len(data)
+    print(f"[seed] places: загружено {len(data)}")
+    return len(data)
 
 
 def _parse_dt(value) -> datetime | None:

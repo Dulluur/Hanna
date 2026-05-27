@@ -14,17 +14,20 @@ export function EventsFilters(){
     staleTime: 5 * 60_000,
   })
 
+
   const [eventType, setEventType] = useSingleParam('event_type')
   const [ageGroup, setAgeGroup] = useSingleParam('age_group')
   const [search, setSearch] = useSingleParam('search')
 
   const hasAnyFilter = eventType != null || ageGroup != null || (search ?? '').length > 0
 
+
   function resetAll(){
     setEventType(null)
     setAgeGroup(null)
     setSearch(null)
   }
+
 
   if(isLoading || !data){
     return (
@@ -34,6 +37,7 @@ export function EventsFilters(){
       </div>
     )
   }
+
 
   return(
     <div className="space-y-3">
@@ -74,6 +78,7 @@ export function EventsFilters(){
               </section>
             )}
 
+
           {data.age_groups.length > 0 &&(
             <section>
               <h3 className="mb-1 text-xs font-semibold uppercase text-muted-foreground">
@@ -87,6 +92,7 @@ export function EventsFilters(){
               />
             </section>
           )}
+
 
           {hasAnyFilter && (
             <Button type='button' variant='ghost' size='sm' onClick={resetAll}>

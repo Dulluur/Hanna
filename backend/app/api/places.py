@@ -57,9 +57,9 @@ def _apply_basic_filters(
 
     for code in diet_tags:
         sub = (
-           select(place_diet_tags.c.place_id)
-           .join(DietTag, DietTag.id == place_diet_tags.c.diet_tag_id)
-           .where(DietTag.code == code)
+            select(place_diet_tags.c.place_id)
+            .join(DietTag, DietTag.id == place_diet_tags.c.diet_tag_id)
+            .where(DietTag.code == code)
         )
         stmt = stmt.where(Place.id.in_(sub))
 
@@ -104,7 +104,7 @@ async def list_places(
     price_band: str | None = None,
     budget: int | None = Query(default=None, ge=0),
     search: str | None = None,
-    limit: int = Query(default=20, ge=1, le=100),
+    limit: int = Query(default=100, ge=1, le=200),
     offset: int = Query(default=0, ge=0),
 ) -> PlaceListResponse:
     basic = _apply_basic_filters(
@@ -121,8 +121,12 @@ async def list_places(
     total_stmt = select(func.count()).select_from(items_stmt.order_by(None).subquery())
     total = (await session.execute(total_stmt)).scalar_one()
 
+    # Сортировка по убыванию id: новые заведения (партнёрские регистрации)
+    # появляются вверху списка, не теряются за дефолтным limit=20. Если в
+    # будущем добавим UI-сортировку (по рейтингу / цене) — параметр заменит
+    # этот дефолт.
     items_rows = (
-        await session.scalars(items_stmt.order_by(Place.id).limit(limit).offset(offset))
+        await session.scalars(items_stmt.order_by(Place.id.desc()).limit(limit).offset(offset))
     ).unique().all()
 
     upsell = []

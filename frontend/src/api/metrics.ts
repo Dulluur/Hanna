@@ -1,19 +1,31 @@
-import {api} from './client'
+import { api } from './client'
 
-export type MetricAction = 'route_click' | 'taxi_click' | 'ticket_click'
+
+export type MetricAction =
+  | 'route_click'
+  | 'taxi_click'
+  | 'ticket_click'
+  | 'phone_click'
+  | 'website_click'
+
+
+export type EntityType = 'place' | 'event'
+
 
 export async function trackMetric(
   action: MetricAction,
-  placeId: number | null,
-  eventId: number | null = null,
-): Promise<void>{
-  try{
-    await api.post('/api/metrics',{
+  entityType: EntityType,
+  entityId: number,
+): Promise<void> {
+  try {
+    await api.post('/api/metrics', {
+      entity_type: entityType,
+      entity_id: entityId,
       action,
-      place_id: placeId,
-      event_id: eventId,
     })
-  } catch{
-    //глотаем - метрика не критична
+  } catch (err) {
+    if (import.meta.env.DEV) {
+      console.warn('[trackMetric] failed', err)
+    }
   }
 }

@@ -36,12 +36,14 @@ export function PlacesFilters(){
   const hasAnyFilter =
     category != null || cuisines.length > 0 || dietTags.length > 0 || (search ?? '').length > 0
 
+
   function resetAll(){
     setCategory(null)
     setCuisines([])
     setDietTags([])
     setSearch(null)
   }
+
 
   if(isLoading || !data){
     return(
@@ -51,6 +53,7 @@ export function PlacesFilters(){
       </div>
     )
   }
+
 
   return (
     <div className="space-y-3">

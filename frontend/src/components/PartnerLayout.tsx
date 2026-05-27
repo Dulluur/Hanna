@@ -12,12 +12,14 @@ import { Button } from '@/components/ui/button'
 import { useMe } from '@/lib/auth'
 import { cn } from '@/lib/utils'
 
+
 const nav = [
   {to: '/partner/dashboard', label: 'Обзор', icon: LayoutDashboard},
   {to: '/partner/dishes', label: 'Блюда', icon: UtensilsCrossed},
   {to: '/partner/events', label: 'События', icon: CalendarRange},
   {to: '/partner/info', label: 'Информация', icon: Info},
 ] as const
+
 
 export function PartnerLayout(){
   const {data:me} = useMe()
@@ -36,7 +38,7 @@ export function PartnerLayout(){
   return(
     <div className="min-h-svh bg-background">
       <header className="border-b">
-        <div className="container flex h-14 items-center justify-between gap-3">
+        <div className="container mx-auto px-4 flex h-14 items-center justify-between gap-3">
           <div className="font-semibold">Hanna · Кабинет партнёра</div>
           <div className="flex items-center gap-3 text-sm">
             {me &&(
@@ -58,7 +60,7 @@ export function PartnerLayout(){
         </div>
       </header>
 
-      <div className="container">
+      <div className="container mx-auto px-4 py-4 flex flex-col gap-4 md:flex-row md:gap-6">
         <nav aria-label='Кабинет партнёра' className='md:w-56 md:shrink-0'>
             <ul className="flex gap-1 overflow-x-auto md:flex-col md:gap-0.5">
               {nav.map(({to, label, icon: Icon}) =>(

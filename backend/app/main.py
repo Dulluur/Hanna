@@ -39,9 +39,11 @@ app.include_router(partner_dishes_api.router)
 app.include_router(partner_events_api.router)
 app.include_router(partner_uploads_api.router)
 
-_UPLOADS_DIR = Path("/uploads")
+
+_UPLOADS_DIR = Path("./uploads").resolve()
 _UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
 app.mount("/uploads", StaticFiles(directory=_UPLOADS_DIR), name="uploads")
+
 
 setup_admin(app)
 

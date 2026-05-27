@@ -3,20 +3,24 @@ export interface CategoryRead{
   name: string
 }
 
+
 export interface CuisineRead{
   code: string
   name: string
 }
+
 
 export interface DietTagRead{
   code: string
   name: string
 }
 
+
 export interface AmenityTagRead{
   code: string
   name: string
 }
+
 
 export interface PriceBandRead{
   code: string
@@ -25,15 +29,18 @@ export interface PriceBandRead{
   max_price: number
 }
 
+
 export interface EventTypeRead{
   code: string
   name: string
 }
 
+
 export interface AgeGroupRead{
   code: string
   name: string
 }
+
 
 export interface PlaceTopDishRead{
   id: number
@@ -45,6 +52,7 @@ export interface PlaceTopDishRead{
   weight: string | null
   tags: string[]
 }
+
 
 export interface PlaceListItem{
   id: number
@@ -58,6 +66,7 @@ export interface PlaceListItem{
   price_band: PriceBandRead | null
   cuisines: CuisineRead[]
 }
+
 
 export interface PlaceDetail extends PlaceListItem{
   description: string | null
@@ -73,12 +82,14 @@ export interface PlaceDetail extends PlaceListItem{
   updated_at: string
 }
 
+
 export interface UpsellItem{
   place: PlaceListItem
   delta_pct: number
   delta_rub: number
   reasons: string[]
 }
+
 
 export interface PlaceListResponse{
   items: PlaceListItem[]
@@ -87,6 +98,7 @@ export interface PlaceListResponse{
   limit: number
   offset: number
 }
+
 
 export interface EventListItem{
   id: number
@@ -101,12 +113,14 @@ export interface EventListItem{
   place: PlaceListItem | null
 }
 
+
 export interface EventDetail extends EventListItem{
   description: string | null
   is_active: boolean
   created_at: string
   updated_at: string
 }
+
 
 export interface CurrentUser{
   id: number

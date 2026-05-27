@@ -1,8 +1,17 @@
+import re
 from datetime import datetime
 from decimal import Decimal
 from typing import Any
+from urllib.parse import urlsplit
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
+
+HIGHLIGHTS_MAX = 3
+HIGHLIGHT_MAX_LEN = 60
+
+
+_DANGEROUS_SCHEME_RE = re.compile(r"^\s*(javascript|data|vbscript|file|blob):", re.I)
+_ALLOWED_SCHEMES = {"http", "https"}
 
 from app.schemas.reference import (
     AmenityTagRead,
@@ -92,6 +101,47 @@ class PlaceUpdate(BaseModel):
     cuisines: list[str] | None = None
     diet_tags: list[str] | None = None
     amenities: list[str] | None = None
+
+    @field_validator("website")
+    @classmethod
+    def _validate_website(cls, value: str | None) -> str | None:
+        # Главная граница безопасности: фронтовый normalizeUrl можно обойти
+        # прямым запросом к API или через админку. Пускаем только http/https,
+        # режем javascript:/data:/прочее — иначе ссылка уедет в href и станет
+        # вектором для XSS/фишинга у гостей.
+        if value is None:
+            return None
+        url = value.strip()
+        if not url:
+            return None
+        if _DANGEROUS_SCHEME_RE.match(url):
+            raise ValueError("Сайт: такая ссылка не разрешена")
+        if "://" not in url:
+            url = f"https://{url}"
+        parts = urlsplit(url)
+        if parts.scheme.lower() not in _ALLOWED_SCHEMES:
+            raise ValueError("Сайт: разрешены только http/https-ссылки")
+        if not parts.netloc:
+            raise ValueError("Сайт: укажите корректный адрес, например example.com")
+        return url
+
+    @field_validator("upsell_highlights")
+    @classmethod
+    def _clean_highlights(cls, value: list[str] | None) -> list[str] | None:
+        if value is None:
+            return None
+        cleaned: list[str] = []
+        seen: set[str] = set()
+        for item in value:
+            text = item.strip()[:HIGHLIGHT_MAX_LEN].strip()
+            if not text:
+                continue
+            key = text.lower()
+            if key in seen:
+                continue
+            seen.add(key)
+            cleaned.append(text)
+        return cleaned[:HIGHLIGHTS_MAX]
 
 
 class PlaceTopDishCreate(BaseModel):

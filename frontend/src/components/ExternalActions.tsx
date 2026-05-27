@@ -3,6 +3,7 @@ import { MapPin, Car } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 
+
 interface Props{
   placeId: number
   eventId?: number | null
@@ -11,27 +12,36 @@ interface Props{
   longitude: string | number
 }
 
+
 export function ExternalActions({placeId, eventId = null, address, latitude, longitude}: Props){
   const [toast, setToast] = useState<string | null>(null)
 
   const dgisUrl = `https://2gis.ru/routeSearch/rsType/car/to/${longitude}%2C${latitude}`
 
   async function onRouteClick(){
-    void trackMetric('route_click', placeId, eventId)
+    if (eventId != null) {
+      void trackMetric('route_click', 'event', eventId)
+    } else {
+      void trackMetric('route_click', 'place', placeId)
+    }
     window.open(dgisUrl, '_blank', 'noopener, noreferrer')
   }
 
   async function onTaxiClick(){
-    void trackMetric('taxi_click', placeId, eventId)
+    if (eventId != null) {
+      void trackMetric('taxi_click', 'event', eventId)
+    } else {
+      void trackMetric('taxi_click', 'place', placeId)
+    }
     try{
       await navigator.clipboard.writeText(address)
-      setToast('Адрес скопирован, вставьте в inDrive')
+      setToast('Адрес скопирован — откройте приложение inDrive и вставьте')
     }catch{
       setToast(`Скопируйте адрес вручную: ${address}`)
     }
-    window.open('https://indrive.com/', '_blank', 'noopener, noreferrer')
-    setTimeout(() => setToast(null), 3000)
+    setTimeout(() => setToast(null), 4000)
   }
+
 
   return(
     <div className="space-y-2">

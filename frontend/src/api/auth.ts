@@ -10,6 +10,7 @@ Promise<CurrentUser>{
   return data
 }
 
+
 export async function logout(): Promise<void>{
   await api.post('/auth/logout')
 }
@@ -28,7 +29,7 @@ export interface PartnerRegisterRequest{
   place_name: string
   place_address: string
   place_phone?: string
-  place_desctiption?: string
+  place_description?: string
 }
 
 

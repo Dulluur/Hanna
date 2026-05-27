@@ -1,4 +1,6 @@
 import { api } from './client';
+
+
 import type{
   AgeGroupRead,
   AmenityTagRead,
@@ -19,6 +21,7 @@ export interface ReferencesBundle{
   age_groups: AgeGroupRead[]
   price_bands: PriceBandRead[]
 }
+
 
 export async function fetchReferences(): Promise<ReferencesBundle>{
   const {data} = await api.get<ReferencesBundle>('/api/references')

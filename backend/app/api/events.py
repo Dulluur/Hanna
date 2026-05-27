@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, Query
@@ -22,10 +22,14 @@ async def list_events(
     price_max: int | None = Query(default=None, ge=0),
     place_id: int | None = None,
     search: str | None = None,
-    limit: int = Query(default=20, ge=1, le=100),
+    limit: int = Query(default=100, ge=1, le=200),
     offset: int = Query(default=0, ge=0),
 ) -> Paginated[EventListItem]:
     base = select(Event).where(Event.is_active.is_(True))
+
+    # Скрываем прошедшие события: сравниваем с ends_at, а если его нет — со starts_at.
+    now = datetime.now(timezone.utc)
+    base = base.where(func.coalesce(Event.ends_at, Event.starts_at) >= now)
 
     if event_type:
         base = base.join(EventType, Event.event_type_id == EventType.id).where(

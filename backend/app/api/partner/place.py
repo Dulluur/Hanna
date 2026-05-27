@@ -9,8 +9,13 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.auth.deps import require_partner
 from app.database import get_session
-from app.models import AmenityTag, Cuisine, DietTag, Place, user
+from app.models import AmenityTag, Cuisine, DietTag, Place, User
 from app.schemas import PlaceDetail, PlaceUpdate
+
+"""
+place.py - управление своим заведением.
+Два эндпоинта: GET /me (посмотреть) и PUT /me (обновить). Партнёр привязан к одному заведению через user.place_id, поэтому id в URL не нужен. Редактирует описание, часы работы, фото, телефон, сайт, и связи многие-ко-многим: кухни / диет-теги / удобства (передаются кодами вроде vegan, бэк превращает в записи через _load_refs_by_code).
+"""
 
 router = APIRouter(prefix="/api/partner/place", tags=["parthner:place"])
 

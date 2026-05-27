@@ -8,7 +8,33 @@ from sqladmin import Admin, ModelView
 from sqladmin.authentication import AuthenticationBackend
 from sqlalchemy import select
 from starlette.requests import Request
-from wtforms import PasswordField, StringField
+from wtforms import PasswordField, StringField, widgets
+
+
+class _CompactCheckbox(widgets.CheckboxInput):
+
+    def __call__(self, field, **kwargs):
+        kwargs.pop("class_", None)
+        kwargs.pop("class", None)
+        kwargs.setdefault(
+            "style",
+            "width: 16px; height: 16px; margin-right: 8px; vertical-align: middle;",
+        )
+        return super().__call__(field, **kwargs)
+
+
+class _UnstyledList(widgets.ListWidget):
+    """Список <ul> без буллетов и без рамки от form-control."""
+
+    def __call__(self, field, **kwargs):
+        kwargs.pop("class_", None)
+        kwargs.pop("class", None)
+        kwargs.setdefault(
+            "style",
+            "list-style: none; padding: 0; margin: 0; border: none; background: transparent;",
+        )
+        return super().__call__(field, **kwargs)
+
 
 from app.auth.passwords import hash_password, verify_password
 from app.auth.sessions import create_session, delete_session, get_user_by_session
@@ -40,6 +66,7 @@ class AdminAuth(AuthenticationBackend):
         email = form.get("username", "")
         password = form.get("password", "")
 
+
         async with AsyncSessionLocal() as db:
             user = (
                 await db.execute(select(User).where(User.email == email))
@@ -65,6 +92,7 @@ class AdminAuth(AuthenticationBackend):
         request.session.update({ADMIN_SESSION_KEY: sess.id})
         return True
 
+
     async def logout(self, request: Request) -> bool:
         sid = request.session.pop(ADMIN_SESSION_KEY, None)
         if sid:
@@ -73,10 +101,12 @@ class AdminAuth(AuthenticationBackend):
                 await db.commit()
         return True
 
+
     async def authenticate(self, request: Request) -> bool:
         sid = request.session.get(ADMIN_SESSION_KEY)
         if not sid:
             return False
+
 
         async with AsyncSessionLocal() as db:
             user = await get_user_by_session(db, sid)
@@ -97,7 +127,7 @@ class PlaceAdmin(ModelView, model=Place):
     ]
     column_searchable_list = [Place.name, Place.address]
     column_sortable_list = [Place.id, Place.name, Place.rating_2gis]
-    form_excluded_columns = [Place.created_at, Place.updated_at]
+    form_excluded_columns = [Place.created_at, Place.updated_at, Place.top_dishes]
 
     form_extra_fields = {
         "coords_paste": StringField(
@@ -106,6 +136,21 @@ class PlaceAdmin(ModelView, model=Place):
                 "перезапишет поля latitude/longtitude ниже."
             ),
         ),
+    }
+
+    form_args = {
+        "cuisines": {
+            "widget": _UnstyledList(prefix_label=False),
+            "option_widget": _CompactCheckbox(),
+        },
+        "diet_tags": {
+            "widget": _UnstyledList(prefix_label=False),
+            "option_widget": _CompactCheckbox(),
+        },
+        "amenities": {
+            "widget": _UnstyledList(prefix_label=False),
+            "option_widget": _CompactCheckbox(),
+        },
     }
 
     async def on_model_change(
@@ -211,37 +256,79 @@ class SessionAdmin(ModelView, model=Session):
     ]
 
 
-class _RefBase:
-    can_export = True
-    column_searchable_list = ["code", "name"]
+_REF_SEARCH = ["code", "name"]
+_REF_SORT = ["id", "code", "name"]
+_REF_LABELS = {
+    "code": "Код",
+    "name": "Название",
+    "icon": "Иконка",
+    "min_age": "Мин. возраст",
+    "min_price": "Мин. цена",
+    "max_price": "Макс. цена",
+}
 
 
-class CategoryAdmin(ModelView, _RefBase, model=Category):
+class CategoryAdmin(ModelView, model=Category):
     name, name_plural = "Категория", "Категории"
+    can_export = True
+    column_list = ["id", "code", "name", "icon"]
+    column_searchable_list = _REF_SEARCH
+    column_sortable_list = _REF_SORT
+    column_labels = _REF_LABELS
 
 
-class CuisineAdmin(ModelView, _RefBase, model=Cuisine):
+class CuisineAdmin(ModelView, model=Cuisine):
     name, name_plural = "Кухня", "Кухни"
+    can_export = True
+    column_list = ["id", "code", "name"]
+    column_searchable_list = _REF_SEARCH
+    column_sortable_list = _REF_SORT
+    column_labels = _REF_LABELS
 
 
-class DietTagAdmin(ModelView, _RefBase, model=DietTag):
+class DietTagAdmin(ModelView, model=DietTag):
     name, name_plural = "Диет-тег", "Диет-теги"
+    can_export = True
+    column_list = ["id", "code", "name"]
+    column_searchable_list = _REF_SEARCH
+    column_sortable_list = _REF_SORT
+    column_labels = _REF_LABELS
 
 
-class AmenityTagAdmin(ModelView, _RefBase, model=AmenityTag):
+class AmenityTagAdmin(ModelView, model=AmenityTag):
     name, name_plural = "Удобство", "Удобства"
+    can_export = True
+    column_list = ["id", "code", "name"]
+    column_searchable_list = _REF_SEARCH
+    column_sortable_list = _REF_SORT
+    column_labels = _REF_LABELS
 
 
-class EventTypeAdmin(ModelView, _RefBase, model=EventType):
+class EventTypeAdmin(ModelView, model=EventType):
     name, name_plural = "Тип события", "Типы событий"
+    can_export = True
+    column_list = ["id", "code", "name", "icon"]
+    column_searchable_list = _REF_SEARCH
+    column_sortable_list = _REF_SORT
+    column_labels = _REF_LABELS
 
 
-class AgeGroupAdmin(ModelView, _RefBase, model=AgeGroup):
+class AgeGroupAdmin(ModelView, model=AgeGroup):
     name, name_plural = "Возрастная группа", "Возрастные группы"
+    can_export = True
+    column_list = ["id", "code", "name", "min_age"]
+    column_searchable_list = _REF_SEARCH
+    column_sortable_list = _REF_SORT
+    column_labels = _REF_LABELS
 
 
-class PriceBandAdmin(ModelView, _RefBase, model=PriceBand):
+class PriceBandAdmin(ModelView, model=PriceBand):
     name, name_plural = "Ценовой сегмент", "Ценовые сегменты"
+    can_export = True
+    column_list = ["id", "code", "name", "min_price", "max_price"]
+    column_searchable_list = _REF_SEARCH
+    column_sortable_list = _REF_SORT
+    column_labels = _REF_LABELS
 
 
 class ClickMetricAdmin(ModelView, model=ClickMetric):

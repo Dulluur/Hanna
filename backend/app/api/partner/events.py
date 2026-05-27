@@ -11,7 +11,13 @@ from app.database import get_session
 from app.models import AgeGroup, Event, EventType, User
 from app.schemas import EventCreate, EventDetail, EventListItem, EventUpdate
 
-router = APIRouter(prefix="/api/parther/events", tags=["partner:events"])
+"""
+events.py - события заведения (концерты, мастер-классы и т.п.).
+Тоже CRUD. Отличие от блюд - есть две справочные связи: event_type и age_group. С фронта приходят строковые коды (например "concert", "18+"), а хелперы _resolve_event_type / _resolve_age_group ищут их в справочниках и возвращают id для базы. Если код неизвестен - 422.
+"""
+
+
+router = APIRouter(prefix="/api/partner/events", tags=["partner:events"])
 
 
 async def _load_my_event(db: AsyncSession, user: User, event_id: int) -> Event:
@@ -45,11 +51,11 @@ async def _resolve_age_group(db: AsyncSession, code: str | None) -> int | None:
     return obj.id
 
 
-@router.get("", response_model=list[EventListItem])
+@router.get("", response_model=list[EventDetail])
 async def list_my_events(
     user: Annotated[User, Depends(require_partner)],
     db: Annotated[AsyncSession, Depends(get_session)],
-) -> list[EventListItem]:
+) -> list[EventDetail]:
     rows = (
         await db.scalars(
             select(Event)
@@ -57,7 +63,7 @@ async def list_my_events(
             .order_by(Event.starts_at.desc())
         )
     ).all()
-    return [EventListItem.model_validate(e) for e in rows]
+    return [EventDetail.model_validate(e) for e in rows]
 
 @router.post("", response_model=EventDetail, status_code=status.HTTP_201_CREATED)
 async def create_event(

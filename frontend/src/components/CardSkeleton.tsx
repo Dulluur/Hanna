@@ -1,6 +1,7 @@
 import { Card, CardContent} from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
+
 export function CardSkeleton() {
   return (
     <Card className="overflow-hidden">
@@ -17,6 +18,7 @@ export function CardSkeleton() {
     </Card>
   );
 }
+
 
 export function CardSkeletonList({ count = 4 }: { count?: number }) {
   return (

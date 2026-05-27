@@ -4,6 +4,7 @@ import { fetchMe } from '@/api/auth'
 import type { CurrentUser } from '@/api/types'
 import { useQuery } from '@tanstack/react-query'
 
+
 export function useMe(){
   return useQuery<CurrentUser | null>({
     queryKey: ['me'],
@@ -21,10 +22,12 @@ export function useMe(){
   })
 }
 
+
 interface RequireAuthProps{
   children: React.ReactNode
   role?: 'admin' | 'partner'
 }
+
 
 export function RequireAuth({children, role}: RequireAuthProps){
   const {data: me, isLoading} = useMe()

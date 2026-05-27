@@ -14,6 +14,7 @@ export function BudgetBar(){
   const [editing, setEditing] = useState(false)
   const [draft, setDraft] = useState<string>(budget != null ? String(budget): '')
 
+
   function commit(){
     const trimmed = draft.trim()
     if(trimmed === ''){
@@ -26,6 +27,7 @@ export function BudgetBar(){
     }
     setEditing(false)
   }
+
 
   if (!editing) {
     return (
@@ -56,6 +58,7 @@ export function BudgetBar(){
       </button>
     )
   }
+
 
   return (
     <div className='flex items-center gap-2 rounded-md border bg-background px-3 py-1.5'>

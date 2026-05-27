@@ -1,10 +1,12 @@
 import { useCallback } from 'react';
 import {useSearchParams} from 'react-router-dom'
 
+
 export function useMultiParam(name: string): [string[], (next: string[]) =>
 void] {
   const [searchParams, setSearchParams] = useSearchParams()
   const values = searchParams.getAll(name)
+
 
   const setValues = useCallback(
     (next: string[]) => {

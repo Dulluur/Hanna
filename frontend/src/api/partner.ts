@@ -1,5 +1,5 @@
 import {api} from './client'
-import type { EventDetail, EventListItem, PlaceDetail, PlaceTopDishRead } from './types'
+import type { EventDetail, PlaceDetail, PlaceTopDishRead } from './types'
 
 
 export async function fetchMyPlace(): Promise<PlaceDetail> {
@@ -109,7 +109,7 @@ export interface EventUpdate{
   description?: string | null
   event_type?: string | null
   age_group?: string | null
-  price?: string | null
+  price?: number | null
   starts_at?: string
   ends_at?: string | null
   ticket_url?: string | null
@@ -118,8 +118,8 @@ export interface EventUpdate{
 }
 
 
-export async function fetchMyEvents(): Promise<EventListItem[]> {
-  const {data} = await api.get<EventListItem[]>('/api/partner/events')
+export async function fetchMyEvents(): Promise<EventDetail[]> {
+  const {data} = await api.get<EventDetail[]>('/api/partner/events')
   return data
 }
 

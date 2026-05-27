@@ -10,6 +10,11 @@ from pydantic import BaseModel
 from app.auth.deps import require_partner
 from app.models import User
 
+"""
+uploads - загрузка картинок партнёром.
+Принимает файл (JPEG/PNG/WEBP, до 5 МБ), проверяет что это реально картинка (по сигнатуре байт), сохраняет в ./uploads/ со случайным именем и возвращает URL. Используется фронтом везде, где партнёр выбирает фото — заведение, блюда, события.
+"""
+
 router = APIRouter(prefix="/api/partner/uploads", tags=["partner:uploads"])
 
 _ALLOWED_TYPES: dict[str, str] ={

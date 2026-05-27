@@ -7,10 +7,10 @@
 - name: Тыгын Дархан
   description: Ресторан гостиницы с национальной якутской кухней и видом на город.
   address: пр. Ленина, 5
-  latitude: 62.0282
-  longitude: 129.7300
+  latitude: 62.0287
+  longitude: 129.7322
   category: restaurant
-  price_band: P4
+  price_band: P9
   cuisines: [yakut, european]
   diet_tags: [kids_menu]
   amenities: [wifi, parking, private_room, wheelchair]
@@ -26,10 +26,10 @@
 - name: Эһэ-Хайа
   description: Премиум-ресторан в этно-стиле, вид на Лену.
   address: ул. Ярославского, 12
-  latitude: 62.0298
-  longitude: 129.7411
+  latitude: 62.0288
+  longitude: 129.7375
   category: restaurant
-  price_band: P4
+  price_band: P9
   cuisines: [yakut]
   diet_tags: [gluten_free]
   amenities: [terrace, parking, private_room, wifi]
@@ -45,10 +45,10 @@
 - name: Le Petit
   description: Французская кухня, авторские десерты, камерный зал.
   address: ул. Орджоникидзе, 28
-  latitude: 62.0259
+  latitude: 62.0282
   longitude: 129.7355
   category: restaurant
-  price_band: P4
+  price_band: P8
   cuisines: [european, italian]
   diet_tags: [vegetarian, gluten_free]
   amenities: [wifi, private_room]
@@ -65,10 +65,10 @@
 - name: Махтал
   description: Якутская и европейская кухня в центре города.
   address: ул. Кирова, 18
-  latitude: 62.0276
-  longitude: 129.7322
+  latitude: 62.0272
+  longitude: 129.734
   category: restaurant
-  price_band: P3
+  price_band: P7
   cuisines: [yakut, european]
   diet_tags: [kids_menu]
   amenities: [wifi, terrace, kids_zone, parking]
@@ -84,10 +84,10 @@
 - name: Уруу
   description: Современная якутская кухня в этно-интерьере.
   address: ул. Дзержинского, 7
-  latitude: 62.0301
-  longitude: 129.7298
+  latitude: 62.0307
+  longitude: 129.731
   category: restaurant
-  price_band: P3
+  price_band: P7
   cuisines: [yakut]
   diet_tags: [kids_menu, lent]
   amenities: [wifi, kids_zone, private_room]
@@ -102,10 +102,10 @@
 - name: Чочур-Муран
   description: Загородный ресторан-усадьба с традиционной кухней.
   address: Вилюйский тракт, 6 км
-  latitude: 62.0455
-  longitude: 129.6921
+  latitude: 62.0651
+  longitude: 129.628
   category: restaurant
-  price_band: P3
+  price_band: P8
   cuisines: [yakut, russian]
   diet_tags: [kids_menu]
   amenities: [parking, terrace, kids_zone, pet_friendly]
@@ -124,7 +124,7 @@
   latitude: 62.0290
   longitude: 129.7340
   category: restaurant
-  price_band: P3
+  price_band: P5
   cuisines: [japanese, asian]
   diet_tags: [vegetarian, lactose_free]
   amenities: [wifi, kids_menu, private_room]
@@ -141,7 +141,7 @@
   latitude: 62.0312
   longitude: 129.7405
   category: restaurant
-  price_band: P3
+  price_band: P6
   cuisines: [asian, chinese]
   diet_tags: [vegan, vegetarian, halal]
   amenities: [wifi, kids_zone]
@@ -158,7 +158,7 @@
   latitude: 62.0245
   longitude: 129.7388
   category: bar
-  price_band: P3
+  price_band: P5
   cuisines: [european, mixed]
   diet_tags: []
   amenities: [wifi, live_music, terrace]
@@ -176,7 +176,7 @@
   latitude: 62.0267
   longitude: 129.7351
   category: bar
-  price_band: P3
+  price_band: P6
   cuisines: [mixed, european]
   diet_tags: [vegetarian]
   amenities: [wifi, live_music]
@@ -195,7 +195,7 @@
   latitude: 62.0255
   longitude: 129.7299
   category: restaurant
-  price_band: P3
+  price_band: P4
   cuisines: [european]
   diet_tags: [vegetarian, gluten_free]
   amenities: [wifi]
@@ -214,7 +214,7 @@
   latitude: 62.0285
   longitude: 129.7330
   category: coffee
-  price_band: P2
+  price_band: P3
   cuisines: [european]
   diet_tags: [vegetarian, vegan, lactose_free]
   amenities: [wifi]
@@ -231,7 +231,7 @@
   latitude: 62.0271
   longitude: 129.7314
   category: coffee
-  price_band: P2
+  price_band: P3
   cuisines: [european]
   diet_tags: [vegetarian, kids_menu]
   amenities: [wifi, kids_zone]
@@ -248,7 +248,7 @@
   latitude: 62.0303
   longitude: 129.7437
   category: cafe
-  price_band: P2
+  price_band: P4
   cuisines: [russian, mixed]
   diet_tags: [kids_menu, lent]
   amenities: [wifi, kids_zone]
@@ -265,7 +265,7 @@
   latitude: 62.0299
   longitude: 129.7352
   category: cafe
-  price_band: P2
+  price_band: P3
   cuisines: [asian, chinese]
   diet_tags: [vegan, vegetarian]
   amenities: [wifi]
@@ -282,7 +282,7 @@
   latitude: 62.0263
   longitude: 129.7361
   category: cafe
-  price_band: P2
+  price_band: P4
   cuisines: [italian, european]
   diet_tags: [vegetarian, kids_menu]
   amenities: [wifi, kids_zone, kids_menu]
@@ -318,7 +318,7 @@
   latitude: 62.0273
   longitude: 129.7325
   category: fastfood
-  price_band: P1
+  price_band: P2
   cuisines: [russian]
   diet_tags: [kids_menu]
   amenities: []
@@ -352,7 +352,7 @@
   latitude: 62.0270
   longitude: 129.7308
   category: fastfood
-  price_band: P1
+  price_band: P2
   cuisines: [european]
   diet_tags: [vegetarian, vegan]
   amenities: [wifi]

@@ -9,8 +9,8 @@
   event_type: concert
   age_group: 12+
   price: 1500
-  starts_at: "2026-05-10T19:00:00+09:00"
-  ends_at: "2026-05-10T21:00:00+09:00"
+  starts_at: "2026-06-20T19:00:00+09:00"
+  ends_at: "2026-06-20T21:00:00+09:00"
   ticket_url: https://example.com/tickets/symphony
 
 - title: Квиз по истории Якутии
@@ -19,8 +19,8 @@
   event_type: quiz
   age_group: 16+
   price: 500
-  starts_at: "2026-05-12T20:00:00+09:00"
-  ends_at: "2026-05-12T22:30:00+09:00"
+  starts_at: "2026-06-24T20:00:00+09:00"
+  ends_at: "2026-06-24T22:30:00+09:00"
   ticket_url: https://example.com/tickets/quiz
 
 - title: Выставка "Якутский эпос Олонхо"
@@ -29,8 +29,8 @@
   event_type: exhibition
   age_group: 0+
   price: 300
-  starts_at: "2026-05-01T11:00:00+09:00"
-  ends_at: "2026-05-15T20:00:00+09:00"
+  starts_at: "2026-06-16T11:00:00+09:00"
+  ends_at: "2026-07-30T20:00:00+09:00"
   ticket_url: ~
 
 - title: Кинопоказ "Тыгын Дархан" (2026)
@@ -39,8 +39,8 @@
   event_type: movie
   age_group: 12+
   price: 400
-  starts_at: "2026-05-08T19:30:00+09:00"
-  ends_at: "2026-05-08T22:00:00+09:00"
+  starts_at: "2026-06-26T19:30:00+09:00"
+  ends_at: "2026-06-26T22:00:00+09:00"
   ticket_url: ~
 
 - title: Мастер-класс по строганине
@@ -49,8 +49,8 @@
   event_type: masterclass
   age_group: 6+
   price: 1200
-  starts_at: "2026-05-04T17:00:00+09:00"
-  ends_at: "2026-05-04T19:00:00+09:00"
+  starts_at: "2026-06-28T17:00:00+09:00"
+  ends_at: "2026-06-28T19:00:00+09:00"
   ticket_url: https://example.com/tickets/master-stroganina
 
 - title: Спектакль "Олонхо"
@@ -59,8 +59,8 @@
   event_type: theatre
   age_group: 6+
   price: 1000
-  starts_at: "2026-05-11T18:00:00+09:00"
-  ends_at: "2026-05-11T20:30:00+09:00"
+  starts_at: "2026-07-04T18:00:00+09:00"
+  ends_at: "2026-07-04T20:30:00+09:00"
   ticket_url: https://example.com/tickets/olonkho
 
 - title: Фестиваль якутской кухни
@@ -69,8 +69,8 @@
   event_type: festival
   age_group: 0+
   price: 800
-  starts_at: "2026-05-14T12:00:00+09:00"
-  ends_at: "2026-05-14T20:00:00+09:00"
+  starts_at: "2026-07-11T12:00:00+09:00"
+  ends_at: "2026-07-11T20:00:00+09:00"
   ticket_url: https://example.com/tickets/yakut-food
 
 - title: Лекция "Лена — река жизни"
@@ -79,8 +79,8 @@
   event_type: lecture
   age_group: 12+
   price: 0
-  starts_at: "2026-05-06T19:00:00+09:00"
-  ends_at: "2026-05-06T20:30:00+09:00"
+  starts_at: "2026-07-02T19:00:00+09:00"
+  ends_at: "2026-07-02T20:30:00+09:00"
   ticket_url: ~
 
 - title: Стендап-концерт
@@ -89,16 +89,16 @@
   event_type: concert
   age_group: 18+
   price: 700
-  starts_at: "2026-05-09T21:00:00+09:00"
-  ends_at: "2026-05-09T23:30:00+09:00"
+  starts_at: "2026-06-25T21:00:00+09:00"
+  ends_at: "2026-06-25T23:30:00+09:00"
   ticket_url: https://example.com/tickets/standup
 
-- title: Трансляция хоккейного матча
-  description: Финал плей-офф КХЛ. Большой экран, бургеры в подарок.
+- title: Трансляция матча РПЛ
+  description: Матч 2-го тура Российской премьер-лиги. Большой экран, бургеры в подарок.
   place: Bar Flamingo
   event_type: sport
   age_group: 0+
   price: 0
-  starts_at: "2026-05-13T20:00:00+09:00"
-  ends_at: "2026-05-13T23:00:00+09:00"
+  starts_at: "2026-07-17T20:00:00+09:00"
+  ends_at: "2026-07-17T23:00:00+09:00"
   ticket_url: ~

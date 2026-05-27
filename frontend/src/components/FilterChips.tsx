@@ -1,10 +1,12 @@
 import { toggleArrayValue } from "@/lib/url-state";
 import { cn } from "@/lib/utils";
 
+
 interface Option {
   code: string;
   name: string;
 }
+
 
 interface MultiProps {
   options: readonly Option[];
@@ -13,6 +15,7 @@ interface MultiProps {
   label: string;
   limit?: number;
 }
+
 
 export function MultiChips({
   options,
@@ -47,12 +50,14 @@ export function MultiChips({
   );
 }
 
+
 interface SingleProps {
   options: readonly Option[];
   selected: string | null;
   onChange: (next: string | null) => void;
   label: string;
 }
+
 
 export function SingleChips({
   options,
