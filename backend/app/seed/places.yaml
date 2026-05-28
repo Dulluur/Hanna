@@ -5,6 +5,7 @@
 # ====================== P4 — премиум (3000–10000 ₽) ======================
 
 - name: Тыгын Дархан
+  photo_url: "https://images.unsplash.com/photo-1599795119678-63f52d65a5d9?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   description: Ресторан гостиницы с национальной якутской кухней и видом на город.
   address: пр. Ленина, 5
   latitude: 62.0287
@@ -24,6 +25,7 @@
   work_hours: "08:00-23:00"
 
 - name: Эһэ-Хайа
+  photo_url: "https://images.unsplash.com/photo-1557955776-857434f1c951?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   description: Премиум-ресторан в этно-стиле, вид на Лену.
   address: ул. Ярославского, 12
   latitude: 62.0288
@@ -43,6 +45,7 @@
   work_hours: "12:00-00:00"
 
 - name: Le Petit
+  photo_url: "https://images.unsplash.com/photo-1606066352252-93e4d325787b?q=80&w=1548&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   description: Французская кухня, авторские десерты, камерный зал.
   address: ул. Орджоникидзе, 28
   latitude: 62.0282
@@ -63,6 +66,7 @@
 # ====================== P3 — средний+ (1500–3000 ₽) ======================
 
 - name: Махтал
+  photo_url: "https://images.unsplash.com/photo-1574966739987-65e38db0f7ce?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   description: Якутская и европейская кухня в центре города.
   address: ул. Кирова, 18
   latitude: 62.0272
@@ -82,6 +86,7 @@
   work_hours: "11:00-23:00"
 
 - name: Уруу
+  photo_url: "https://images.unsplash.com/photo-1565895405227-31cffbe0cf86?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   description: Современная якутская кухня в этно-интерьере.
   address: ул. Дзержинского, 7
   latitude: 62.0307
@@ -100,6 +105,7 @@
   work_hours: "11:00-23:00"
 
 - name: Чочур-Муран
+  photo_url: "https://images.unsplash.com/photo-1703783004020-f863bfd3c49a?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   description: Загородный ресторан-усадьба с традиционной кухней.
   address: Вилюйский тракт, 6 км
   latitude: 62.0651
@@ -119,6 +125,7 @@
   work_hours: "12:00-23:00"
 
 - name: Sushi Yamato
+  photo_url: "https://images.unsplash.com/photo-1502364271109-0a9a75a2a9df?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   description: Японский ресторан с суши-баром и роллами.
   address: пр. Ленина, 33
   latitude: 62.0290
@@ -136,6 +143,7 @@
   work_hours: "12:00-00:00"
 
 - name: Сайгон
+  photo_url: "https://images.unsplash.com/photo-1696449241254-11cf7f18ce32?q=80&w=1744&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   description: Вьетнамская и паназиатская кухня.
   address: ул. Лермонтова, 25
   latitude: 62.0312
@@ -153,6 +161,7 @@
   work_hours: "11:00-23:00"
 
 - name: Bar Flamingo
+  photo_url: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1548&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   description: Бар с европейским меню и трансляциями спортивных матчей.
   address: ул. Петра Алексеева, 14
   latitude: 62.0245
@@ -171,6 +180,7 @@
   work_hours: "16:00-02:00"
 
 - name: Лофт 14
+  photo_url: "https://images.unsplash.com/photo-1737115018142-1a582b0c1d54?q=80&w=1588&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   description: Бар-ресторан в индустриальном стиле, регулярные ивенты.
   address: ул. Аммосова, 14
   latitude: 62.0267
@@ -190,6 +200,7 @@
   work_hours: "17:00-02:00"
 
 - name: Bistro Nord
+  photo_url: "https://images.unsplash.com/photo-1696420691013-b2d7132968f2?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   description: Бистро с европейским меню и сезонной картой.
   address: ул. Октябрьская, 20
   latitude: 62.0255
@@ -209,6 +220,7 @@
 # ====================== P2 — средний (500–1500 ₽) ======================
 
 - name: Точка Кофе
+  photo_url: "https://images.unsplash.com/photo-1453614512568-c4024d13c247?q=80&w=2064&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   description: Спешелти-кофейня с десертами и завтраками.
   address: пр. Ленина, 22
   latitude: 62.0285
@@ -226,6 +238,7 @@
   work_hours: "08:00-22:00"
 
 - name: Cup Story
+  photo_url: "https://images.unsplash.com/photo-1481833761820-0509d3217039?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   description: Уютная кофейня с большим выбором завтраков.
   address: ул. Кирова, 9
   latitude: 62.0271
@@ -243,6 +256,7 @@
   work_hours: "08:00-22:00"
 
 - name: Pelmen Bar
+  photo_url: "https://images.unsplash.com/photo-1586999768265-24af89630739?q=80&w=1548&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   description: Кафе-пельменная с авторскими начинками.
   address: ул. Ярославского, 30
   latitude: 62.0303
@@ -260,6 +274,7 @@
   work_hours: "11:00-22:00"
 
 - name: Бао-Бао
+  photo_url: "https://images.unsplash.com/photo-1516211881327-e5120a941edc?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   description: "Стрит-фуд из Азии: бао, лапша, поке."
   address: пр. Ленина, 50
   latitude: 62.0299
@@ -277,6 +292,7 @@
   work_hours: "11:00-22:00"
 
 - name: Pizzeria Roma
+  photo_url: "https://images.unsplash.com/photo-1571757392712-7c1052de7ce5?q=80&w=1548&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   description: Пиццерия с тонкой неаполитанской пиццей.
   address: ул. Орджоникидзе, 15
   latitude: 62.0263
@@ -296,6 +312,7 @@
 # ====================== P1 — бюджет (0–500 ₽) ======================
 
 - name: Столовая №1
+  photo_url: "https://images.unsplash.com/photo-1551218372-a8789b81b253?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   description: Городская столовая с обедами по будням.
   address: ул. Дзержинского, 21
   latitude: 62.0309
@@ -313,6 +330,7 @@
   work_hours: "09:00-19:00"
 
 - name: Pelmen House
+  photo_url: "https://images.unsplash.com/photo-1571168136613-46401b03904e?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   description: Сетевая пельменная навынос и в зале.
   address: пр. Ленина, 8
   latitude: 62.0273
@@ -330,6 +348,7 @@
   work_hours: "10:00-22:00"
 
 - name: Хот-Дог Стейшн
+  photo_url: "https://images.unsplash.com/photo-1612392166886-ee8475b03af2?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   description: Хот-доги, бургеры, картофель фри.
   address: ул. Лермонтова, 5
   latitude: 62.0317
@@ -347,6 +366,7 @@
   work_hours: "10:00-23:00"
 
 - name: Сэндвич точка
+  photo_url: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?q=80&w=1746&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   description: Свежие сэндвичи и салаты на вынос.
   address: ул. Кирова, 1
   latitude: 62.0270

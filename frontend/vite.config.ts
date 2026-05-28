@@ -20,6 +20,9 @@ export default defineConfig({
       // можно вернуть к дефолту.
       workbox: {
         maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
+        // Серверные пути (админка, API, загрузки) не подменяем SPA-оболочкой —
+        // иначе SW отдаёт index.html на /admin, и React-роутер выкидывает на главную.
+        navigateFallbackDenylist: [/^\/admin/, /^\/api/, /^\/auth/, /^\/uploads/, /^\/health/],
       },
       manifest: {
         name: 'Hanna · Якутск',

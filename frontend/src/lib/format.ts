@@ -35,3 +35,19 @@ export function safeHttpUrl(value: string | null | undefined): string | null {
   if (!value) return null
   return /^https?:\/\//i.test(value.trim()) ? value.trim() : null
 }
+
+
+// work_hours хранится как JSONB: либо простая строка ("08:00-23:00"), либо
+// объект «день: часы» ({"Пн-Пт": "08:00-23:00"}). Приводим к одной строке для
+// показа; пусто/{} → null (тогда блок часов не рисуем).
+export function formatWorkHours(
+  wh: Record<string, unknown> | string | null | undefined,
+): string | null {
+  if (!wh) return null
+  if (typeof wh === 'string') return wh.trim() || null
+  const parts: string[] = []
+  for (const [day, hours] of Object.entries(wh)) {
+    if (typeof hours === 'string') parts.push(`${day}: ${hours}`)
+  }
+  return parts.length ? parts.join(', ') : null
+}

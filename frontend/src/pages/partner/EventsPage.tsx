@@ -198,7 +198,7 @@ function NewEventForm({
                 onChange={(e) => setDraft({ ...draft, event_type: e.target.value })}
                 className="w-full rounded-md border bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <option value="">— не выбрано —</option>
+                <option value="">- не выбрано -</option>
                 {refs?.event_types.map((t) => (
                   <option key={t.code} value={t.code}>
                     {t.name}
@@ -212,7 +212,7 @@ function NewEventForm({
                 onChange={(e) => setDraft({ ...draft, age_group: e.target.value })}
                 className="w-full rounded-md border bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <option value="">— не выбрано —</option>
+                <option value="">- не выбрано -</option>
                 {refs?.age_groups.map((a) => (
                   <option key={a.code} value={a.code}>
                     {a.name}
@@ -224,7 +224,7 @@ function NewEventForm({
           <FormField label="Ссылка на покупку билета">
             <input
               type="text"
-              placeholder="example.com/tickets — можно без https://"
+              placeholder="example.com/tickets - можно без https://"
               value={draft.ticket_url}
               onChange={(e) => setDraft({ ...draft, ticket_url: e.target.value })}
               className="w-full rounded-md border bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -432,7 +432,7 @@ function EventRow({
                 onChange={(e) => setDraft({ ...draft, event_type: e.target.value })}
                 className="w-full rounded-md border bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <option value="">— не выбрано —</option>
+                <option value="">- не выбрано -</option>
                 {refs?.event_types.map((t) => (
                   <option key={t.code} value={t.code}>
                     {t.name}
@@ -446,7 +446,7 @@ function EventRow({
                 onChange={(e) => setDraft({ ...draft, age_group: e.target.value })}
                 className="w-full rounded-md border bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <option value="">— не выбрано —</option>
+                <option value="">- не выбрано -</option>
                 {refs?.age_groups.map((a) => (
                   <option key={a.code} value={a.code}>
                     {a.name}
@@ -458,7 +458,7 @@ function EventRow({
           <FormField label="Ссылка на покупку билета">
             <input
               type="text"
-              placeholder="example.com/tickets — можно без https://"
+              placeholder="example.com/tickets - можно без https://"
               value={draft.ticket_url}
               onChange={(e) => setDraft({ ...draft, ticket_url: e.target.value })}
               className="w-full rounded-md border bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"

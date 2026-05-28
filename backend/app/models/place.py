@@ -13,7 +13,7 @@ from sqlalchemy import(
     func,
 )
 
-from sqlalchemy.dialects.postgresql import ARRAY
+from sqlalchemy.dialects.postgresql import ARRAY, JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database import Base
@@ -42,7 +42,7 @@ place_amenities = Table(
     Base.metadata,
     Column("place_id", Integer, ForeignKey("places.id", ondelete="CASCADE"),
     primary_key=True),
-    Column("amentity_id", Integer, ForeignKey("amenity_tags.id", ondelete="CASCADE"), primary_key=True),
+    Column("amenity_id", Integer, ForeignKey("amenity_tags.id", ondelete="CASCADE"), primary_key=True),
 )
 
 class Place(Base):
@@ -60,7 +60,7 @@ class Place(Base):
     price_band_id: Mapped[int | None] = mapped_column(
         ForeignKey("price_bands.id", ondelete="SET NULL")
     )
-    work_hours: Mapped[str | None] = mapped_column(Text)
+    work_hours: Mapped[dict | str | None] = mapped_column(JSONB)
     photo_url: Mapped[str | None] = mapped_column(Text)
     phone: Mapped[str | None] = mapped_column(Text)
     website: Mapped[str | None] = mapped_column(Text)

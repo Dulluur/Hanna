@@ -50,7 +50,7 @@ export function RoutePage() {
     return (
       <div className="rounded-lg border bg-card p-6 text-center text-sm text-muted-foreground">
         {isSharedView
-          ? 'Ссылка пустая — в маршруте нет ни одной точки.'
+          ? 'Ссылка пустая - в маршруте нет ни одной точки.'
           : 'Маршрут пуст. Добавляйте заведения и события сердечком на карточке.'}
       </div>
     )
@@ -159,7 +159,7 @@ function OwnHeader({
     if (typeof navigator !== 'undefined' && navigator.share) {
       try {
         await navigator.share({
-          title: 'Маршрут — Hanna',
+          title: 'Маршрут - Hanna',
           text: shareText,
           url: shareUrl,
         })

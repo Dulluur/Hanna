@@ -39,11 +39,11 @@ export function HighlightsField({ value, onChange }: Props) {
     setError(null)
     if (!s) return false
     if (s.length < MIN_LEN) {
-      setError(`Слишком коротко — минимум ${MIN_LEN} символа`)
+      setError(`Слишком коротко - минимум ${MIN_LEN} символа`)
       return false
     }
     if (s.length > MAX_LEN) {
-      setError(`Слишком длинно — максимум ${MAX_LEN} символов`)
+      setError(`Слишком длинно - максимум ${MAX_LEN} символов`)
       return false
     }
     if (has(s)) {

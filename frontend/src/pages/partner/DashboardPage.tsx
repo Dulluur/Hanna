@@ -33,7 +33,7 @@ export function DashboardPage() {
 
   const p = place.data
 
-  
+
   return (
     <div className="space-y-4">
       <h2 className="text-lg font-semibold">Моё заведение</h2>
@@ -91,7 +91,7 @@ export function DashboardPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-semibold">{dishes.data?.length ?? '—'}</div>
+            <div className="text-2xl font-semibold">{dishes.data?.length ?? '-'}</div>
             <p className="text-xs text-muted-foreground">
               Можно опубликовать до 5 блюд
             </p>
@@ -106,7 +106,7 @@ export function DashboardPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-semibold">{events.data?.length ?? '—'}</div>
+            <div className="text-2xl font-semibold">{events.data?.length ?? '-'}</div>
             <p className="text-xs text-muted-foreground">
               Включая прошедшие и неактивные
             </p>

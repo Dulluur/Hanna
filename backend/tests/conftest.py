@@ -48,12 +48,12 @@ INACTIVE_PASSWORD = "InactiveP@ss123"
 
 TEST_DB_URL = os.getenv(
     "HANNA_TEST_DATABASE_URL",
-    "postgresql+asyncpg://hanna:hanna@db:5433/hanna_test",
+    "postgresql+asyncpg://hanna:hanna@db:5432/hanna_test",
 )
 
 TEST_UPSELL_DB_URL = os.getenv(
     "HANNA_UPSELL_TEST_DATABASE_URL",
-    "postgresql+asyncpg://hanna:hanna@db:5433/hanna_test_upsell",
+    "postgresql+asyncpg://hanna:hanna@db:5432/hanna_test_upsell",
 )
 
 

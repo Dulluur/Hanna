@@ -130,10 +130,10 @@ def upgrade() -> None:
     )
     op.create_table('place_amenities',
     sa.Column('place_id', sa.Integer(), nullable=False),
-    sa.Column('amentity_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['amentity_id'], ['amenity_tags.id'], ondelete='CASCADE'),
+    sa.Column('amenity_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['amenity_id'], ['amenity_tags.id'], ondelete='CASCADE'),
     sa.ForeignKeyConstraint(['place_id'], ['places.id'], ondelete='CASCADE'),
-    sa.PrimaryKeyConstraint('place_id', 'amentity_id')
+    sa.PrimaryKeyConstraint('place_id', 'amenity_id')
     )
     op.create_table('place_cuisines',
     sa.Column('place_id', sa.Integer(), nullable=False),

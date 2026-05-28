@@ -12,6 +12,7 @@
   starts_at: "2026-06-20T19:00:00+09:00"
   ends_at: "2026-06-20T21:00:00+09:00"
   ticket_url: https://example.com/tickets/symphony
+  photo_url: "https://images.unsplash.com/photo-1692552952004-dacd7219bf29?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 
 - title: Квиз по истории Якутии
   description: Командная игра в формате паба-квиз. До 6 человек в команде.
@@ -22,6 +23,7 @@
   starts_at: "2026-06-24T20:00:00+09:00"
   ends_at: "2026-06-24T22:30:00+09:00"
   ticket_url: https://example.com/tickets/quiz
+  photo_url: "https://images.unsplash.com/photo-1649180573784-bd23dbe5606a?q=80&w=1724&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 
 - title: Выставка "Якутский эпос Олонхо"
   description: Иллюстрации, артефакты и интерактивные экспонаты.
@@ -32,6 +34,7 @@
   starts_at: "2026-06-16T11:00:00+09:00"
   ends_at: "2026-07-30T20:00:00+09:00"
   ticket_url: ~
+  photo_url: "https://images.unsplash.com/photo-1503293050619-6048ffad0dc5?q=80&w=1750&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 
 - title: Кинопоказ "Тыгын Дархан" (2026)
   description: Якутское историческое кино с обсуждением после показа.
@@ -42,6 +45,7 @@
   starts_at: "2026-06-26T19:30:00+09:00"
   ends_at: "2026-06-26T22:00:00+09:00"
   ticket_url: ~
+  photo_url: "https://images.unsplash.com/photo-1485095329183-d0797cdc5676?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 
 - title: Мастер-класс по строганине
   description: Шеф ресторана покажет, как правильно делать строганину из чира.
@@ -52,6 +56,7 @@
   starts_at: "2026-06-28T17:00:00+09:00"
   ends_at: "2026-06-28T19:00:00+09:00"
   ticket_url: https://example.com/tickets/master-stroganina
+  photo_url: "https://images.unsplash.com/photo-1677412479532-dd0185413a73?q=80&w=930&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 
 - title: Спектакль "Олонхо"
   description: Постановка по мотивам якутского эпоса. Камерная сцена, 80 мест.
@@ -62,6 +67,7 @@
   starts_at: "2026-07-04T18:00:00+09:00"
   ends_at: "2026-07-04T20:30:00+09:00"
   ticket_url: https://example.com/tickets/olonkho
+  photo_url: "https://images.unsplash.com/photo-1715318755388-100298581a17?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 
 - title: Фестиваль якутской кухни
   description: Дегустация блюд от 5 ресторанов, лекции, мастер-классы для детей.
@@ -72,6 +78,7 @@
   starts_at: "2026-07-11T12:00:00+09:00"
   ends_at: "2026-07-11T20:00:00+09:00"
   ticket_url: https://example.com/tickets/yakut-food
+  photo_url: "https://images.unsplash.com/photo-1658218615127-40b7068bbae5?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 
 - title: Лекция "Лена — река жизни"
   description: Открытая лекция о биоразнообразии и экологии Лены.
@@ -82,6 +89,7 @@
   starts_at: "2026-07-02T19:00:00+09:00"
   ends_at: "2026-07-02T20:30:00+09:00"
   ticket_url: ~
+  photo_url: "https://images.unsplash.com/photo-1519852476561-ec618b0183ba?q=80&w=1712&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 
 - title: Стендап-концерт
   description: Открытый микрофон + хедлайнер вечера.
@@ -92,6 +100,7 @@
   starts_at: "2026-06-25T21:00:00+09:00"
   ends_at: "2026-06-25T23:30:00+09:00"
   ticket_url: https://example.com/tickets/standup
+  photo_url: "https://images.unsplash.com/photo-1611956425642-d5a8169abd63?q=80&w=1811&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 
 - title: Трансляция матча РПЛ
   description: Матч 2-го тура Российской премьер-лиги. Большой экран, бургеры в подарок.
@@ -102,3 +111,4 @@
   starts_at: "2026-07-17T20:00:00+09:00"
   ends_at: "2026-07-17T23:00:00+09:00"
   ticket_url: ~
+  photo_url: "https://images.unsplash.com/photo-1641135698530-8d919344c0e5?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

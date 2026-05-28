@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     database_url: str = "postgresql+asyncpg://hanna:hanna@localhost:5432/hanna"
     env: str = "development"
 
-    admin_email: str = "admin@hanna.local"
+    admin_email: str = "admin@hanna.example"
     admin_password: str = "admin"
 
     session_cookie_name: str = "session_id"

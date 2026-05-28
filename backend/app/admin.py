@@ -160,6 +160,17 @@ class PlaceAdmin(ModelView, model=Place):
             "widget": _UnstyledList(prefix_label=False),
             "option_widget": _CompactCheckbox(),
         },
+        # work_hours — JSONB. sqladmin рисует JSON-редактор; без подсказки
+        # непонятно, какой объект вводить. Формат «день: часы» — его же ждёт
+        # фронтовый formatWorkHours (MapPage.tsx).
+        "work_hours": {
+            "label": "Часы работы",
+            "description": (
+                'JSON-объект вида «день: часы». Пример: '
+                '{"Пн-Пт": "08:00-23:00", "Сб": "10:00-00:00", "Вс": "выходной"}. '
+                'Оставьте {} (пустой объект), если часы не указаны.'
+            ),
+        },
     }
 
 

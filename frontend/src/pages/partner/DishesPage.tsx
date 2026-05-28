@@ -91,7 +91,11 @@ export function DishesPage() {
 
 interface DishDraft {
   name: string
-  price: number
+  // Цену держим строкой, а не числом: иначе при очистке поля пустая строка
+  // превращается в Number('') === 0, и поле «прыгает» обратно на ноль -
+  // ввести своё значение становится невозможно. В число переводим только
+  // при отправке (Number(draft.price)).
+  price: string
   description: string
   weight: string
   photo_url: string
@@ -101,7 +105,7 @@ interface DishDraft {
 
 const EMPTY_DRAFT: DishDraft = {
   name: '',
-  price: 0,
+  price: '',
   description: '',
   weight: '',
   photo_url: '',
@@ -117,7 +121,7 @@ function NewDishForm({ onCreated }: { onCreated: () => void }) {
     mutationFn: () => {
       const payload: DishCreate = {
         name: draft.name,
-        price: draft.price,
+        price: Number(draft.price),
         description: draft.description || null,
         weight: draft.weight || null,
         photo_url: draft.photo_url || null,
@@ -168,7 +172,7 @@ function NewDishForm({ onCreated }: { onCreated: () => void }) {
                 type="number"
                 min={0}
                 value={draft.price}
-                onChange={(e) => setDraft({ ...draft, price: Number(e.target.value) })}
+                onChange={(e) => setDraft({ ...draft, price: e.target.value })}
                 className="w-full rounded-md border bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
             </FormField>
@@ -204,7 +208,7 @@ function NewDishForm({ onCreated }: { onCreated: () => void }) {
             />
             <p className="mt-1 text-xs text-muted-foreground">
               Эти плашки рисуются на карточке блюда (как на маркетплейсах).
-              На фильтрацию списка заведений они не влияют — для этого есть
+              На фильтрацию списка заведений они не влияют - для этого есть
               теги диет на странице «Информация».
             </p>
           </FormField>
@@ -260,7 +264,7 @@ function DishRow({
   const [editing, setEditing] = useState(false)
   const [draft, setDraft] = useState<DishDraft>({
     name: dish.name,
-    price: dish.price,
+    price: String(dish.price),
     description: dish.description ?? '',
     weight: dish.weight ?? '',
     photo_url: dish.photo_url ?? '',
@@ -272,7 +276,7 @@ function DishRow({
     mutationFn: () =>
       updateDish(dish.id, {
         name: draft.name,
-        price: draft.price,
+        price: Number(draft.price),
         description: draft.description || null,
         weight: draft.weight || null,
         photo_url: draft.photo_url || null,
@@ -296,7 +300,7 @@ function DishRow({
       <Card>
         <CardContent className="flex items-start justify-between gap-3 p-3">
           {/*
-            Превью фото слева — 64×64 квадрат. Если фото нет, рендерим
+            Превью фото слева - 64×64 квадрат. Если фото нет, рендерим
             ImagePlaceholder (тот же, что и для мест без обложки), чтобы
             не было визуального "провала" в строке.
           */}
@@ -391,7 +395,7 @@ function DishRow({
                 type="number"
                 min={0}
                 value={draft.price}
-                onChange={(e) => setDraft({ ...draft, price: Number(e.target.value) })}
+                onChange={(e) => setDraft({ ...draft, price: e.target.value })}
                 className="w-full rounded-md border bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
             </FormField>

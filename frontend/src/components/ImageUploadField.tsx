@@ -46,7 +46,7 @@ export function ImageUploadField({
   async function handleFile(file: File) {
     setError(null)
     if (file.size > MAX_BYTES) {
-      setError(`Файл слишком большой — максимум ${MAX_BYTES / (1024 * 1024)} МБ`)
+      setError(`Файл слишком большой - максимум ${MAX_BYTES / (1024 * 1024)} МБ`)
       return
     }
     setUploading(true)
@@ -100,7 +100,7 @@ export function ImageUploadField({
             ref={inputRef}
             id={inputId}
             type="file"
-            accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif"
+            accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.jpg,.jpeg,.png,.webp,.heic,.heif"
             disabled={uploading}
             onChange={(e) => {
               const file = e.target.files?.[0]

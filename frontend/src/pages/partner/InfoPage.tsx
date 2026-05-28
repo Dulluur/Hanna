@@ -73,13 +73,13 @@ export function InfoPage() {
           <div className="grid gap-1 sm:grid-cols-2">
             <Readonly label="Название" value={place.name} />
             <Readonly label="Адрес" value={place.address} />
-            <Readonly label="Категория" value={place.category?.name ?? '—'} />
+            <Readonly label="Категория" value={place.category?.name ?? '-'} />
             <Readonly
               label="Ценовой сегмент"
               value={
                 place.price_band
                   ? `${place.price_band.min_price}–${place.price_band.max_price} ₽`
-                  : '—'
+                  : '-'
               }
             />
           </div>

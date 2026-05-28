@@ -66,7 +66,7 @@ def _apply_basic_filters(
     for code in amenities:
         sub = (
             select(place_amenities.c.place_id)
-            .join(AmenityTag, AmenityTag.id == place_amenities.c.amentity_id)
+            .join(AmenityTag, AmenityTag.id == place_amenities.c.amenity_id)
             .where(AmenityTag.code == code)
         )
         stmt = stmt.where(Place.id.in_(sub))

@@ -8,7 +8,7 @@ import { Calendar, Locate, UtensilsCrossed, X } from 'lucide-react'
 import { fetchPlace, fetchPlaces } from '@/api/places'
 import { fetchEvents } from '@/api/events'
 import type { EventListItem, PlaceDetail, PlaceListItem } from '@/api/types'
-import { formatEventStart } from '@/lib/format'
+import { formatEventStart, formatWorkHours } from '@/lib/format'
 import { cn } from '@/lib/utils'
 
 
@@ -62,16 +62,6 @@ function buildIconMarker(kind: 'food' | 'event'): HTMLDivElement {
   return wrapper
 }
 
-
-function formatWorkHours(wh: PlaceDetail['work_hours']): string | null {
-  if (!wh) return null
-  if (typeof wh === 'string') return wh
-  const parts: string[] = []
-  for (const [day, hours] of Object.entries(wh)) {
-    if (typeof hours === 'string') parts.push(`${day}: ${hours}`)
-  }
-  return parts.length ? parts.join(', ') : null
-}
 
 type Selected =
   | { type: 'place'; data: PlaceListItem }

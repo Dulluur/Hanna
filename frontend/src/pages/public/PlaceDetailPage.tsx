@@ -1,4 +1,4 @@
-import { ArrowLeft, Globe, Phone, Star } from 'lucide-react'
+import { ArrowLeft, Clock, Globe, Phone, Star } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { fetchPlace } from '@/api/places'
@@ -8,7 +8,7 @@ import { ExternalActions } from '@/components/ExternalActions'
 import { FavoriteButton } from '@/components/FavoriteButton'
 import { ImagePlaceholder } from '@/components/ImagePlaceholder'
 import { PlaceMenu } from '@/components/PlaceMenu'
-import { safeHttpUrl } from '@/lib/format'
+import { formatWorkHours, safeHttpUrl } from '@/lib/format'
 
 
 export function PlaceDetailPage() {
@@ -48,6 +48,7 @@ export function PlaceDetailPage() {
 
   const rating = data.rating_2gis ? Number(data.rating_2gis) : null
   const websiteUrl = safeHttpUrl(data.website)
+  const workHours = formatWorkHours(data.work_hours)
 
   return (
     <article className="space-y-5">
@@ -178,6 +179,16 @@ export function PlaceDetailPage() {
                   </li>
                 )}
               </ul>
+            </section>
+          )}
+
+          {workHours && (
+            <section>
+              <h2 className="mb-1 text-sm font-semibold text-muted-foreground">Часы работы</h2>
+              <p className="inline-flex items-center gap-1.5 text-sm">
+                <Clock className="h-3.5 w-3.5" aria-hidden />
+                {workHours}
+              </p>
             </section>
           )}
         </div>

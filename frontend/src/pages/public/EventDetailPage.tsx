@@ -147,7 +147,7 @@ export function EventDetailPage() {
               {budgetBadge.ticketFits ? (
                 <div className="font-medium">
                   {isFree
-                    ? 'Бесплатно — укладывается в бюджет'
+                    ? 'Бесплатно - укладывается в бюджет'
                     : `Билет ${formatRub(ticketPrice)} укладывается в бюджет (${formatRub(budget!)})`}
                 </div>
               ) : (
@@ -162,14 +162,14 @@ export function EventDetailPage() {
                   {budgetBadge.combo.fits ? (
                     <>
                       Если поужинать в этом заведении: {formatRub(ticketPrice)} + ужин от{' '}
-                      {formatRub(budgetBadge.combo.mealMin)} = {formatRub(budgetBadge.combo.total)} —
+                      {formatRub(budgetBadge.combo.mealMin)} = {formatRub(budgetBadge.combo.total)} -
                       тоже укладывается
                     </>
                   ) : (
                     <>
                       С ужином в этом заведении: {formatRub(ticketPrice)} + от{' '}
                       {formatRub(budgetBadge.combo.mealMin)} = {formatRub(budgetBadge.combo.total)} (на{' '}
-                      {formatRub(budgetBadge.combo.delta)} больше бюджета — можно поесть в другом месте)
+                      {formatRub(budgetBadge.combo.delta)} больше бюджета - можно поесть в другом месте)
                     </>
                   )}
                 </div>
