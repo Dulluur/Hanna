@@ -124,7 +124,7 @@ function RegisterForm() {
         <h3 className="text-sm font-semibold">Контактная информация</h3>
         <Field
           id="email"
-          label="Email (логин)"
+          label="Email"
           type="email"
           autoComplete="username"
           required
@@ -133,7 +133,7 @@ function RegisterForm() {
         />
         <Field
           id="contact_name"
-          label="Имя контактного лица"
+          label="ФИО контактного лица (отчество не обязательно)"
           required
           value={form.contact_name}
           onChange={(v) => update('contact_name', v)}

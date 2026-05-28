@@ -115,8 +115,6 @@ export function PlaceDetailPage() {
           <ExternalActions
             placeId={data.id}
             address={data.address}
-            latitude={data.latitude}
-            longitude={data.longitude}
           />
 
 

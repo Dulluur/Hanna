@@ -1,0 +1,84 @@
+# Прод-конфигурация. Первый запуск — через ./init-letsencrypt.sh (выпуск
+# сертификата), дальше: docker compose -f docker-compose.prod.yml up -d --build
+# Значения берутся из .env (см. .env.example).
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      ENV: production
+      SECRET_KEY: ${SECRET_KEY}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      SESSION_COOKIE_SECURE: "true"
+      CORS_ORIGINS: ${CORS_ORIGINS}
+    depends_on:
+      db:
+        condition: service_healthy
+    # Перед стартом прогоняем миграции. Сидинг — отдельной командой (см. DEPLOY.md).
+    command: >
+      sh -c "alembic upgrade head &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000
+             --proxy-headers --forwarded-allow-ips='*'"
+    volumes:
+      - uploads:/app/uploads
+    expose:
+      - "8000"
+
+  web:
+    build:
+      context: ./frontend
+      args:
+        # Пусто → относительные запросы, nginx проксирует на backend (same-origin).
+        VITE_API_URL: ""
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN}
+      # Подставляем только DOMAIN, чтобы envsubst не трогал nginx-переменные.
+      NGINX_ENVSUBST_FILTER: "^DOMAIN$$"
+    depends_on:
+      - backend
+    volumes:
+      - letsencrypt:/etc/letsencrypt:ro
+      - webroot:/var/www/certbot:ro
+    # Раз в 6 часов перечитываем конфиг — чтобы подхватить продлённый сертификат.
+    command: >
+      /bin/sh -c "while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g 'daemon off;'"
+
+  certbot:
+    image: certbot/certbot:latest
+    restart: unless-stopped
+    volumes:
+      - letsencrypt:/etc/letsencrypt
+      - webroot:/var/www/certbot
+    # Раз в 12 часов пробуем продлить (no-op, если ещё рано).
+    entrypoint: >
+      /bin/sh -c "trap exit TERM; while :; do
+        certbot renew --webroot -w /var/www/certbot --quiet;
+        sleep 12h & wait $${!};
+      done"
+
+volumes:
+  db_data:
+  uploads:
+  letsencrypt:
+  webroot:

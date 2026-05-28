@@ -86,7 +86,7 @@ export function Sheet({
           </header>
         )}
 
-        <div className="flex-1 overflow-y-auto px-40 pb-6">{children}</div>
+        <div className="flex-1 overflow-y-auto px-4 pb-6">{children}</div>
       </div>
     </div>
   );

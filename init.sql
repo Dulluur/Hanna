@@ -66,8 +66,16 @@ INSERT INTO age_groups (code, name, min_age) VALUES
 ON CONFLICT (code) do NOTHING;
 
 INSERT INTO price_bands (code, name, min_price, max_price)
-  ('P1', '₽', 0, 500),
-  ('P2', '₽₽', 500, 1500),
-  ('P3', '₽₽₽', 1500, 3000),
-  ('P4', '₽₽₽₽', 3000, 10000)
+  ('P1', '₽',      0,    300),
+  ('P2', '₽₽',    300,   550),
+  ('P3', '₽₽',    550,   750),
+  ('P4', '₽₽₽',   750,   950),
+  ('P5', '₽₽₽',   950,  1150),
+  ('P6', '₽₽₽',  1150,  1400),
+  ('P7', '₽₽₽₽', 1400,  1700),
+  ('P8', '₽₽₽₽', 1700,  2200),
+  ('P9', '₽₽₽₽₽', 2200, 15000),
 ON CONFLICT (code) DO NOTHING;
+
+
+

@@ -214,8 +214,6 @@ export function EventDetailPage() {
                   placeId={data.place.id}
                   eventId={data.id}
                   address={data.place.address}
-                  latitude={data.place.latitude}
-                  longitude={data.place.longitude}
                 />
               </div>
             </section>

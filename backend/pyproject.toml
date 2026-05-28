@@ -25,6 +25,10 @@ dev = [
     "pytest-asyncio>=0.23",
 ]
 
+[tool.pytest.ini_options]
+# Голые async def-тесты запускаются без @pytest.mark.asyncio на каждом.
+asyncio_mode = "auto"
+
 [build-system]
 requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"

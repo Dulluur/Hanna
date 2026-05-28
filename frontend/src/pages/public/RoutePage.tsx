@@ -188,7 +188,7 @@ function OwnHeader({
       <div className="mb-3">
         <h2 className="text-xl font-semibold">Мой маршрут</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Поделитесь подборкой друзьям ссылкой — они откроют её в браузере и
+          Поделитесь подборкой друзьям ссылкой - они откроют её в браузере и
           увидят те же карточки.
         </p>
       </div>
@@ -262,7 +262,7 @@ function SharedHeader(props: {
           В подборке {props.placeCount} заведений и {props.eventCount} событий.
         </p>
         <p className="mt-2 text-xs text-muted-foreground">
-          Этот маршрут открыт через ссылку — он не сохранён у вас. Можно
+          Этот маршрут открыт через ссылку - он не сохранён у вас. Можно
           добавить его в свой маршрут, чтобы вернуться позже.
         </p>
         <div className="mt-3">

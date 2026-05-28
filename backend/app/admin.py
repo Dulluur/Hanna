@@ -1,14 +1,13 @@
 from __future__ import annotations
 
-import re
-from decimal import Decimal, InvalidOperation
 from typing import Any
 
 from sqladmin import Admin, ModelView
 from sqladmin.authentication import AuthenticationBackend
 from sqlalchemy import select
 from starlette.requests import Request
-from wtforms import PasswordField, StringField, widgets
+from wtforms import Form, PasswordField, widgets
+from wtforms.validators import NumberRange
 
 
 class _CompactCheckbox(widgets.CheckboxInput):
@@ -116,6 +115,18 @@ class AdminAuth(AuthenticationBackend):
         return True
 
 
+
+class _UserForm(Form):
+    password = PasswordField(
+        "Пароль",
+        description=(
+            "При редактировании оставьте пустым, чтобы не менять. "
+            "Для нового пользователя - минимум 8 символов."
+        ),
+        render_kw={"autocomplete": "new-password"},
+    )
+
+
 class PlaceAdmin(ModelView, model=Place):
     name = "Заведение"
     name_plural = "Заведения"
@@ -129,16 +140,14 @@ class PlaceAdmin(ModelView, model=Place):
     column_sortable_list = [Place.id, Place.name, Place.rating_2gis]
     form_excluded_columns = [Place.created_at, Place.updated_at, Place.top_dishes]
 
-    form_extra_fields = {
-        "coords_paste": StringField(
-            description=(
-                "Например: 62.0282, 129.7355. Если заполнено - "
-                "перезапишет поля latitude/longtitude ниже."
-            ),
-        ),
-    }
-
     form_args = {
+        # Координаты вводятся вручную двумя полями. Валидируем диапазон на форме.
+        "latitude": {
+            "validators": [NumberRange(min=-90, max=90, message="Широта должна быть от -90 до 90")],
+        },
+        "longitude": {
+            "validators": [NumberRange(min=-180, max=180, message="Долгота должна быть от -180 до 180")],
+        },
         "cuisines": {
             "widget": _UnstyledList(prefix_label=False),
             "option_widget": _CompactCheckbox(),
@@ -152,38 +161,6 @@ class PlaceAdmin(ModelView, model=Place):
             "option_widget": _CompactCheckbox(),
         },
     }
-
-    async def on_model_change(
-        self,
-        data: dict[str, Any],
-        model: Place,
-        is_created: bool,
-        request: Request,
-    ) -> None:
-
-        paste = (data.pop("coords_paste", "") or "").strip()
-        if not paste:
-            return
-        parts = re.split(r"[,;\s]+", paste)
-        if len(parts) < 2:
-            raise ValueError(
-                "Координаты: ожидаются два числа через запятую, например 62.0282, 129.7355"
-            )
-        try:
-            lat = Decimal(parts[0])
-            lon = Decimal(parts[1])
-        except InvalidOperation as exc:
-            raise ValueError(
-                "Координаты: не получилось распознать числа."
-                "Пример: 62.0282, 129.7355"
-            ) from exc
-
-        if not(-90 <= lat <=90):
-            raise ValueError("Широта(lat) должна быть от -90 до 90")
-        if not(-180 <= lon <=180):
-            raise ValueError("Долгота (lon) должна быть от -180 до 180")
-        model.latitude = lat
-        model.longitude = lon
 
 
 class PlaceTopDishAdmin(ModelView, model=PlaceTopDish):
@@ -214,17 +191,10 @@ class UserAdmin(ModelView, model=User):
 
     column_list = [User.id, User.email, User.name, User.role, User.place_id, User.is_active]
     column_searchable_list = [User.email]
+    # Хэш пароля не показываем и в карточке (detail), не только в списке.
+    column_details_exclude_list = [User.password_hash]
     form_excluded_columns = [User.created_at, User.password_hash]
-    form_extra_fields = {
-        "password": PasswordField(
-            "Пароль",
-            description=(
-                "Для нового пользователя - обязательно поле."
-                "При редактировании оставьте пустым, чтобы не менять пароль."
-            ),
-            render_kw={"autocomplete": "new-password"},
-        ),
-    }
+    form_base_class = _UserForm
 
     async def on_model_change(
         self,
@@ -236,7 +206,7 @@ class UserAdmin(ModelView, model=User):
         pwd = (data.pop("password", "") or "").strip()
         if pwd:
             if len(pwd) < 6:
-                raise ValueError("Пароль слишком короткий - минимум 6 символов")
+                raise ValueError("Пароль слишком короткий - минимум 8 символов")
             model.password_hash = hash_password(pwd)
         elif is_created:
             raise ValueError(

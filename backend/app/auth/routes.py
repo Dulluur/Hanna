@@ -47,7 +47,7 @@ async def login(
     request: Request,
     response: Response,
     db: Annotated[AsyncSession, Depends(get_session)],
-    _: Annotated[None, Depends(login_rate_limit)] = None,
+    _: Annotated[None, Depends(login_rate_limit)],
 ) -> UserMe:
     user = (
         await db.execute(select(User).where(User.email == body.email))
@@ -135,7 +135,7 @@ _YAKUTSK_LON = Decimal("129.7300")
 async def partner_register(
     body: PartnerRegisterRequest,
     db: Annotated[AsyncSession, Depends(get_session)],
-    _: Annotated[None, Depends(login_rate_limit)] = None,
+    _: Annotated[None, Depends(login_rate_limit)],
 ) -> PartnerRegisterResponse:
     existing = (
         await db.execute(select(User.id).where(User.email == body.email))

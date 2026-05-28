@@ -1,22 +1,21 @@
 import { trackMetric } from '@/api/metrics'
-import { MapPin, Car } from 'lucide-react'
-import { useState } from 'react'
 import { Button } from '@/components/ui/button'
+import { Car, MapPin } from 'lucide-react'
+import { useState } from 'react'
 
 
 interface Props{
   placeId: number
   eventId?: number | null
   address: string
-  latitude: string | number
-  longitude: string | number
 }
 
 
-export function ExternalActions({placeId, eventId = null, address, latitude, longitude}: Props){
+export function ExternalActions({placeId, eventId = null, address}: Props){
   const [toast, setToast] = useState<string | null>(null)
 
-  const dgisUrl = `https://2gis.ru/routeSearch/rsType/car/to/${longitude}%2C${latitude}`
+
+  const dgisUrl = `https://2gis.ru/search/${encodeURIComponent('Якутск, ' + address)}`
 
   async function onRouteClick(){
     if (eventId != null) {
@@ -35,7 +34,7 @@ export function ExternalActions({placeId, eventId = null, address, latitude, lon
     }
     try{
       await navigator.clipboard.writeText(address)
-      setToast('Адрес скопирован — откройте приложение inDrive и вставьте')
+      setToast('Адрес скопирован - откройте приложение Drivee и вставьте')
     }catch{
       setToast(`Скопируйте адрес вручную: ${address}`)
     }
@@ -48,11 +47,11 @@ export function ExternalActions({placeId, eventId = null, address, latitude, lon
       <div className="grid grid-cols-2 gap-2">
         <Button type="button" onClick={onRouteClick} variant="default">
           <MapPin className='h-4 w-4' aria-hidden/>
-          Маршрут в 2ГИС
+          Открыть в 2ГИС
         </Button>
         <Button type="button" onClick={onTaxiClick} variant="outline">
           <Car className="h-4 w-4" aria-hidden/>
-            Вызвать inDrive
+            Вызвать Drivee
         </Button>
       </div>
       {toast && (

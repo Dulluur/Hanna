@@ -71,13 +71,13 @@ export function Layout() {
       </main>
 
       <nav className="fixed bottom-0 inset-x-0 z-20 border-t bg-background md:hidden">
-        <ul className="container mx-auto grid grid-cols-5 h-16 items-end">
+        <ul className="container mx-auto grid grid-cols-5 h-16">
           {tabs.slice(0, 2).map((t) => (
             <SideTab key={t.to} {...t} />
           ))}
 
 
-          <li className="relative h-full flex items-end justify-center">
+          <li className="relative h-full flex flex-col items-center justify-center gap-1">
             <NavLink
               to="/map"
               aria-label="Карта"
@@ -91,7 +91,9 @@ export function Layout() {
               <Logo className="h-14 w-14" />
               <span className="sr-only">Карта</span>
             </NavLink>
-            <span className="pb-2 text-xs text-muted-foreground">Карта</span>
+            {/* Пустой слот под выступающий логотип, чтобы подпись встала вровень с соседними. */}
+            <span className="h-5" aria-hidden />
+            <span className="text-xs text-muted-foreground">Карта</span>
           </li>
 
           {tabs.slice(3).map((t) => (

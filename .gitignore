@@ -19,8 +19,12 @@ htmlcov/
 # node
 node_modules/
 dist/
+dev-dist/
 .vite/
 *.log
+
+# загруженные пользователями файлы (живут в volume, не в git)
+uploads/
 
 # IDE
 .idea/

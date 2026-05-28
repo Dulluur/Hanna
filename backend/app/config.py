@@ -16,7 +16,11 @@ class Settings(BaseSettings):
     session_ttl_days: int = 7
     secret_key: str = "dev-secret-change-me"
 
-    cors_origins: list[str] = ["http://localhost:5173", "http://localhost:3000"]
+    cors_origins: list[str] = [
+        "http://localhost:5173",  # Vite dev
+        "http://localhost:4173",  # Vite preview (production-сборка локально)
+        "http://localhost:3000",
+    ]
 
     @field_validator("cors_origins", mode="before")
     @classmethod
