@@ -1,5 +1,7 @@
+from typing import Annotated
+
 from pydantic import field_validator
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 
 class Settings(BaseSettings):
@@ -16,7 +18,7 @@ class Settings(BaseSettings):
     session_ttl_days: int = 7
     secret_key: str = "dev-secret-change-me"
 
-    cors_origins: list[str] = [
+    cors_origins: Annotated[list[str], NoDecode] = [
         "http://localhost:5173",  # Vite dev
         "http://localhost:4173",  # Vite preview (production-сборка локально)
         "http://localhost:3000",
