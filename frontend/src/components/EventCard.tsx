@@ -1,9 +1,11 @@
 import type { EventListItem } from "@/api/types";
 import { FavoriteButton } from "@/components/FavoriteButton";
+import { HeartBurst } from "@/components/HeartBurst";
 import { ImagePlaceholder } from "@/components/ImagePlaceholder";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { formatEventStart, formatRub } from "@/lib/format";
+import { useDoubleTapLike } from "@/lib/use-double-tap-like";
 import { CalendarDays, MapPin, Ticket } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -19,20 +21,27 @@ interface Props {
 
 export function EventCard({ event, upsell }: Props) {
   const isFree = event.price === 0 || event.price == null;
+  const { onClick, burst, onBurstEnd } = useDoubleTapLike(
+    "event",
+    event.id,
+    `/events/${event.id}`,
+  );
 
 
   return (
     <Link
       to={`/events/${event.id}`}
+      onClick={onClick}
       className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-lg"
     >
       <Card
         className={
           upsell
-            ? "overflow-hidden border-2 border-primary/30 bg-primary/[0.03]"
-            : "overflow-hidden hover:border-primary/40 transition-colors"
+            ? "relative overflow-hidden border-2 border-primary/30 bg-primary/[0.03]"
+            : "relative overflow-hidden hover:border-primary/40 transition-colors"
         }
       >
+        <HeartBurst show={burst} onEnd={onBurstEnd} />
         {event.photo_url ? (
           <img
             src={event.photo_url}

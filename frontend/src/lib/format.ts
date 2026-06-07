@@ -10,6 +10,20 @@ export function formatRub(value: number):string{
 }
 
 
+// Самая дорогая категория в справочнике задаётся условным «потолком» (P9: 2200–15000).
+// У неё показываем открытую границу («от 2200 ₽»), а не бессмысленную середину.
+const PRICE_OPEN_TOP = 5000
+
+// Средний чек по ценовой категории: одно число (≈ середина диапазона), а не «0–300 ₽».
+// Так у дешёвой категории получается «≈ 150 ₽» (не выглядит «бесплатно»), а у
+// верхней открытой категории — «от 2200 ₽». Середину округляем до 50 ₽ «для глаза».
+export function formatPriceBand(min: number, max: number): string {
+  if (max >= PRICE_OPEN_TOP) return `от ${min} ₽`
+  const avg = Math.round((min + max) / 2 / 50) * 50
+  return `≈ ${avg} ₽`
+}
+
+
 const DT_SHORT = new Intl.DateTimeFormat('ru-RU',{
   day: '2-digit',
   month: 'short',

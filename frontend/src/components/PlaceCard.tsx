@@ -4,7 +4,10 @@ import type { PlaceListItem } from '@/api/types'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { FavoriteButton } from '@/components/FavoriteButton'
+import { HeartBurst } from '@/components/HeartBurst'
 import { ImagePlaceholder } from '@/components/ImagePlaceholder'
+import { formatPriceBand } from '@/lib/format'
+import { useDoubleTapLike } from '@/lib/use-double-tap-like'
 
 
 interface Props {
@@ -19,19 +22,26 @@ interface Props {
 
 export function PlaceCard({ place, upsell }: Props) {
   const rating = place.rating_2gis ? Number(place.rating_2gis) : null
+  const { onClick, burst, onBurstEnd } = useDoubleTapLike(
+    'place',
+    place.id,
+    `/places/${place.id}`,
+  )
 
   return (
     <Link
       to={`/places/${place.id}`}
+      onClick={onClick}
       className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-lg"
     >
       <Card
         className={
           upsell
-            ? 'overflow-hidden border-2 border-primary/30 bg-primary/[0.03]'
-            : 'overflow-hidden hover:border-primary/40 transition-colors'
+            ? 'relative overflow-hidden border-2 border-primary/30 bg-primary/[0.03]'
+            : 'relative overflow-hidden hover:border-primary/40 transition-colors'
         }
       >
+        <HeartBurst show={burst} onEnd={onBurstEnd} />
         {place.photo_url ? (
           <img
             src={place.photo_url}
@@ -76,7 +86,10 @@ export function PlaceCard({ place, upsell }: Props) {
             ))}
             {place.price_band && (
               <Badge variant="outline" className="ml-auto">
-                {place.price_band.min_price}–{place.price_band.max_price} ₽
+                {formatPriceBand(
+                  place.price_band.min_price,
+                  place.price_band.max_price,
+                )}
               </Badge>
             )}
           </div>
