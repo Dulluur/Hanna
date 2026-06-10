@@ -62,6 +62,9 @@ class Place(Base):
     )
     work_hours: Mapped[dict | str | None] = mapped_column(JSONB)
     photo_url: Mapped[str | None] = mapped_column(Text)
+    photos: Mapped[list[str]] = mapped_column(
+        ARRAY(Text), nullable=False, server_default="{}"
+    )
     phone: Mapped[str | None] = mapped_column(Text)
     website: Mapped[str | None] = mapped_column(Text)
     rating_2gis: Mapped[Decimal | None] = mapped_column(Numeric(2,1))

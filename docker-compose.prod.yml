@@ -1,4 +1,4 @@
-# Прод-конфигурация. Первый запуск — через ./init-letsencrypt.sh (выпуск
+# Прод-конфигурация. Первый запуск - через ./init-letsencrypt.sh (выпуск
 # сертификата), дальше: docker compose -f docker-compose.prod.yml up -d --build
 # Значения берутся из .env (см. .env.example).
 services:

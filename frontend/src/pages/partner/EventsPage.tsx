@@ -14,6 +14,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
+import { ImageGalleryField } from '@/components/ImageGalleryField'
 import { ImageUploadField } from '@/components/ImageUploadField'
 import { formatEventStart, formatRub, normalizeUrl } from '@/lib/format'
 
@@ -102,6 +103,7 @@ function NewEventForm({
     ends_at: '',
     ticket_url: '',
     photo_url: '',
+    photos: [] as string[],
   })
 
 
@@ -117,6 +119,7 @@ function NewEventForm({
         ends_at: draft.ends_at ? toIso(draft.ends_at) : null,
         ticket_url: normalizeUrl(draft.ticket_url),
         photo_url: draft.photo_url || null,
+        photos: draft.photos,
       }
       return createEvent(payload)
     },
@@ -232,9 +235,14 @@ function NewEventForm({
           </FormField>
 
           <ImageUploadField
-            label="Фото события"
+            label="Фото события (обложка)"
             value={draft.photo_url}
             onChange={(url) => setDraft({ ...draft, photo_url: url })}
+          />
+
+          <ImageGalleryField
+            value={draft.photos}
+            onChange={(urls) => setDraft({ ...draft, photos: urls })}
           />
 
           {mutation.isError && (
@@ -295,6 +303,7 @@ function EventRow({
     age_group: event.age_group?.code ?? '',
     ticket_url: event.ticket_url ?? '',
     photo_url: event.photo_url ?? '',
+    photos: event.photos ?? [],
   })
 
 
@@ -310,6 +319,7 @@ function EventRow({
         age_group: draft.age_group || null,
         ticket_url: normalizeUrl(draft.ticket_url),
         photo_url: draft.photo_url || null,
+        photos: draft.photos,
       }),
     onSuccess: () => {
       setEditing(false)
@@ -466,9 +476,14 @@ function EventRow({
           </FormField>
 
           <ImageUploadField
-            label="Фото события"
+            label="Фото события (обложка)"
             value={draft.photo_url}
             onChange={(url) => setDraft({ ...draft, photo_url: url })}
+          />
+
+          <ImageGalleryField
+            value={draft.photos}
+            onChange={(urls) => setDraft({ ...draft, photos: urls })}
           />
           <div className="flex gap-2">
             <Button type="submit" size="sm" disabled={updateMutation.isPending}>

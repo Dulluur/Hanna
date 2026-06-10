@@ -11,10 +11,6 @@ from app.database import get_session
 from app.models import AgeGroup, Event, EventType, User
 from app.schemas import EventCreate, EventDetail, EventListItem, EventUpdate
 
-"""
-events.py - события заведения (концерты, мастер-классы и т.п.).
-Тоже CRUD. Отличие от блюд - есть две справочные связи: event_type и age_group. С фронта приходят строковые коды (например "concert", "18+"), а хелперы _resolve_event_type / _resolve_age_group ищут их в справочниках и возвращают id для базы. Если код неизвестен - 422.
-"""
 
 
 router = APIRouter(prefix="/api/partner/events", tags=["partner:events"])
@@ -65,6 +61,7 @@ async def list_my_events(
     ).all()
     return [EventDetail.model_validate(e) for e in rows]
 
+
 @router.post("", response_model=EventDetail, status_code=status.HTTP_201_CREATED)
 async def create_event(
     body: EventCreate,
@@ -82,6 +79,7 @@ async def create_event(
         ends_at=body.ends_at,
         ticket_url=body.ticket_url,
         photo_url=body.photo_url,
+        photos=body.photos,
     )
     db.add(event)
     await db.commit()
@@ -100,7 +98,7 @@ async def update_event(
 
     payload = body.model_dump(exclude_unset=True)
     scalar_fields={
-        "title", "description", "price", "starts_at", "ends_at", "ticket_url", "photo_url", "is_active"
+        "title", "description", "price", "starts_at", "ends_at", "ticket_url", "photo_url", "photos", "is_active"
     }
     for field in scalar_fields & payload.keys():
         setattr(event, field, payload[field])

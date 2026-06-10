@@ -8,7 +8,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { ExternalActions } from '@/components/ExternalActions'
 import { FavoriteButton } from '@/components/FavoriteButton'
-import { ImagePlaceholder } from '@/components/ImagePlaceholder'
+import { PhotoGallery } from '@/components/PhotoGallery'
 import { trackMetric } from '@/api/metrics'
 import { useBudgetStore } from '@/store/budget'
 import { formatEventStart, formatRub } from '@/lib/format'
@@ -97,19 +97,11 @@ export function EventDetailPage() {
 
 
       <div className="grid gap-4 md:grid-cols-[3fr_2fr] md:items-start">
-        {data.photo_url ? (
-          <img
-            src={data.photo_url}
-            alt={data.title}
-            className="aspect-[16/9] w-full rounded-lg object-cover"
-          />
-        ) : (
-          <ImagePlaceholder
-            seed={data.title}
-            alt={data.title}
-            className="aspect-[16/9] w-full rounded-lg"
-          />
-        )}
+        <PhotoGallery
+          images={[data.photo_url, ...data.photos].filter(Boolean) as string[]}
+          alt={data.title}
+          seed={data.title}
+        />
 
         <div className="space-y-4">
           <header className="space-y-2">

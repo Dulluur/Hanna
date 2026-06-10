@@ -1,16 +1,16 @@
-import { useQuery } from '@tanstack/react-query'
-import { CalendarRange, Globe, Phone, UtensilsCrossed } from 'lucide-react'
-import { fetchMyDishes, fetchMyEvents, fetchMyPlace } from '@/api/partner'
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Skeleton } from '@/components/ui/skeleton'
-
+import { fetchMyDishes, fetchMyEvents, fetchMyPlace } from "@/api/partner";
+import { PartnerMetricsWidget } from "@/components/PartnerMetricsWidget";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+import { normalizeUrl } from "@/lib/format";
+import { useQuery } from "@tanstack/react-query";
+import { CalendarRange, Globe, Phone, UtensilsCrossed } from "lucide-react";
 
 export function DashboardPage() {
-  const place = useQuery({ queryKey: ['my-place'], queryFn: fetchMyPlace })
-  const dishes = useQuery({ queryKey: ['my-dishes'], queryFn: fetchMyDishes })
-  const events = useQuery({ queryKey: ['my-events'], queryFn: fetchMyEvents })
-
+  const place = useQuery({ queryKey: ["my-place"], queryFn: fetchMyPlace });
+  const dishes = useQuery({ queryKey: ["my-dishes"], queryFn: fetchMyDishes });
+  const events = useQuery({ queryKey: ["my-events"], queryFn: fetchMyEvents });
 
   if (place.isLoading) {
     return (
@@ -18,21 +18,18 @@ export function DashboardPage() {
         <Skeleton className="h-6 w-1/2" />
         <Skeleton className="h-32 w-full" />
       </div>
-    )
+    );
   }
-
 
   if (place.isError || !place.data) {
     return (
       <div className="rounded-lg border border-destructive/40 bg-destructive/5 p-4 text-sm text-destructive">
         Не удалось загрузить данные заведения.
       </div>
-    )
+    );
   }
 
-
-  const p = place.data
-
+  const p = place.data;
 
   return (
     <div className="space-y-4">
@@ -67,20 +64,30 @@ export function DashboardPage() {
 
           <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
             {p.phone && (
-              <span className="inline-flex items-center gap-1">
+              <a
+                href={`tel:${p.phone}`}
+                className="inline-flex items-center gap-1 hover:underline"
+              >
                 <Phone className="h-3.5 w-3.5" aria-hidden />
                 {p.phone}
-              </span>
+              </a>
             )}
             {p.website && (
-              <span className="inline-flex items-center gap-1">
+              <a
+                href={normalizeUrl(p.website) ?? undefined}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 hover:underline"
+              >
                 <Globe className="h-3.5 w-3.5" aria-hidden />
-                {p.website.replace(/^https?:\/\//, '')}
-              </span>
+                {p.website.replace(/^https?:\/\//, "")}
+              </a>
             )}
           </div>
         </CardContent>
       </Card>
+
+      <PartnerMetricsWidget />
 
       <div className="grid gap-3 sm:grid-cols-2">
         <Card>
@@ -91,7 +98,9 @@ export function DashboardPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-semibold">{dishes.data?.length ?? '-'}</div>
+            <div className="text-2xl font-semibold">
+              {dishes.data?.length ?? "-"}
+            </div>
             <p className="text-xs text-muted-foreground">
               Можно опубликовать до 5 блюд
             </p>
@@ -106,7 +115,9 @@ export function DashboardPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-semibold">{events.data?.length ?? '-'}</div>
+            <div className="text-2xl font-semibold">
+              {events.data?.length ?? "-"}
+            </div>
             <p className="text-xs text-muted-foreground">
               Включая прошедшие и неактивные
             </p>
@@ -114,5 +125,5 @@ export function DashboardPage() {
         </Card>
       </div>
     </div>
-  )
+  );
 }

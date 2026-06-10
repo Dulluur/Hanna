@@ -2,13 +2,14 @@ import { ArrowLeft, Clock, Globe, Phone, Star } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { fetchPlace } from '@/api/places'
+import { trackMetric } from '@/api/metrics'
 import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
 import { ExternalActions } from '@/components/ExternalActions'
 import { FavoriteButton } from '@/components/FavoriteButton'
-import { ImagePlaceholder } from '@/components/ImagePlaceholder'
+import { PhotoGallery } from '@/components/PhotoGallery'
 import { PlaceMenu } from '@/components/PlaceMenu'
-import { formatWorkHours, safeHttpUrl } from '@/lib/format'
+import { formatPriceBand, formatWorkHours, safeHttpUrl } from '@/lib/format'
 
 
 export function PlaceDetailPage() {
@@ -61,19 +62,11 @@ export function PlaceDetailPage() {
       </Link>
 
       <div className="grid gap-4 md:grid-cols-[3fr_2fr] md:items-start">
-        {data.photo_url ? (
-          <img
-            src={data.photo_url}
-            alt={data.name}
-            className="aspect-[16/9] w-full rounded-lg object-cover"
-          />
-        ) : (
-          <ImagePlaceholder
-            seed={data.name}
-            alt={data.name}
-            className="aspect-[16/9] w-full rounded-lg"
-          />
-        )}
+        <PhotoGallery
+          images={[data.photo_url, ...data.photos].filter(Boolean) as string[]}
+          alt={data.name}
+          seed={data.name}
+        />
 
         <div className="space-y-3">
           <header className="space-y-2">
@@ -107,7 +100,10 @@ export function PlaceDetailPage() {
               ))}
               {data.price_band && (
                 <Badge variant="outline">
-                  средний чек {data.price_band.min_price}–{data.price_band.max_price} ₽
+                  средний чек {formatPriceBand(
+                    data.price_band.min_price,
+                    data.price_band.max_price,
+                  )}
                 </Badge>
               )}
             </div>
@@ -158,6 +154,7 @@ export function PlaceDetailPage() {
                   <li>
                     <a
                       href={`tel:${data.phone}`}
+                      onClick={() => void trackMetric('phone_click', 'place', data.id)}
                       className="inline-flex items-center gap-1.5 hover:underline"
                     >
                       <Phone className="h-3.5 w-3.5" aria-hidden />
@@ -171,6 +168,7 @@ export function PlaceDetailPage() {
                       href={websiteUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => void trackMetric('website_click', 'place', data.id)}
                       className="inline-flex items-center gap-1.5 hover:underline"
                     >
                       <Globe className="h-3.5 w-3.5" aria-hidden />

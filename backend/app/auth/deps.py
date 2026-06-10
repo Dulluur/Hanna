@@ -29,7 +29,7 @@ async def get_current_user(
 async def require_admin(
     user: Annotated[User, Depends(get_current_user)],
 ) -> User:
-    if user.role != UserRole.PARTNER or user.place_id is None:
+    if user.role != UserRole.ADMIN:
         raise FORBIDDEN
     return user
 

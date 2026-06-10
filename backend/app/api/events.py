@@ -27,7 +27,6 @@ async def list_events(
 ) -> Paginated[EventListItem]:
     base = select(Event).where(Event.is_active.is_(True))
 
-    # Скрываем прошедшие события: сравниваем с ends_at, а если его нет — со starts_at.
     now = datetime.now(timezone.utc)
     base = base.where(func.coalesce(Event.ends_at, Event.starts_at) >= now)
 

@@ -121,10 +121,6 @@ async def list_places(
     total_stmt = select(func.count()).select_from(items_stmt.order_by(None).subquery())
     total = (await session.execute(total_stmt)).scalar_one()
 
-    # Сортировка по убыванию id: новые заведения (партнёрские регистрации)
-    # появляются вверху списка, не теряются за дефолтным limit=20. Если в
-    # будущем добавим UI-сортировку (по рейтингу / цене) — параметр заменит
-    # этот дефолт.
     items_rows = (
         await session.scalars(items_stmt.order_by(Place.id.desc()).limit(limit).offset(offset))
     ).unique().all()

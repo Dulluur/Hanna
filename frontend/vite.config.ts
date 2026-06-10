@@ -9,9 +9,6 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    // Базовый устанавливаемый PWA: автообновление service worker + прекеш
-    // оболочки приложения (workbox по умолчанию). Сложный офлайн-кеш карты/API
-    // намеренно не настраиваем. SW работает только в production-сборке.
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['apple-touch-icon.png'],
@@ -23,6 +20,28 @@ export default defineConfig({
         // Серверные пути (админка, API, загрузки) не подменяем SPA-оболочкой —
         // иначе SW отдаёт index.html на /admin, и React-роутер выкидывает на главную.
         navigateFallbackDenylist: [/^\/admin/, /^\/api/, /^\/auth/, /^\/uploads/, /^\/health/],
+        runtimeCaching: [
+          {
+            urlPattern: /\/api\/(places|events|references|metrics)/,
+            handler: 'StaleWhileRevalidate',
+            method: 'GET',
+            options: {
+              cacheName: 'hanna-api',
+              expiration: { maxEntries: 200, maxAgeSeconds: 60 * 60 * 24 },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+          {
+            urlPattern: /\/uploads\//,
+            handler: 'CacheFirst',
+            method: 'GET',
+            options: {
+              cacheName: 'hanna-uploads',
+              expiration: { maxEntries: 300, maxAgeSeconds: 60 * 60 * 24 * 30 },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+        ],
       },
       manifest: {
         name: 'Hanna · Якутск',
@@ -56,6 +75,11 @@ export default defineConfig({
   // src="/uploads/..."> уходит на localhost:5173 и возвращает 404. В
   // production за nginx эти роуты обслуживает он сам, прокси не нужен.
   server: {
+    proxy: {
+      '/uploads': 'http://localhost:8000',
+    },
+  },
+  preview: {
     proxy: {
       '/uploads': 'http://localhost:8000',
     },

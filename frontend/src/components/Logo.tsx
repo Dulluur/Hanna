@@ -9,7 +9,7 @@ interface LogoProps {
 export function Logo({ className }: LogoProps) {
   return (
     <img
-      src="/logo.svg"
+      src="/pwa-192x192.png"
       alt="Hanna"
       className={cn('object-contain', className)}
       draggable={false}

@@ -19,8 +19,8 @@ class Settings(BaseSettings):
     secret_key: str = "dev-secret-change-me"
 
     cors_origins: Annotated[list[str], NoDecode] = [
-        "http://localhost:5173",  # Vite dev
-        "http://localhost:4173",  # Vite preview (production-сборка локально)
+        "http://localhost:5173",
+        "http://localhost:4173",
         "http://localhost:3000",
     ]
 

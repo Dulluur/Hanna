@@ -100,10 +100,14 @@ docker compose exec \
 Или на хосте (из `backend/`, с активированным venv и `pip install -e ".[dev]"`):
 
 ```bash
-HANNA_TEST_DATABASE_URL=postgresql+asyncpg://hanna:hanna@localhost:5432/hanna_test \
-HANNA_UPSELL_TEST_DATABASE_URL=postgresql+asyncpg://hanna:hanna@localhost:5432/hanna_test_upsell \
+HANNA_TEST_DATABASE_URL=postgresql+asyncpg://hanna:hanna@127.0.0.1:5432/hanna_test \
+HANNA_UPSELL_TEST_DATABASE_URL=postgresql+asyncpg://hanna:hanna@127.0.0.1:5432/hanna_test_upsell \
 pytest
 ```
+
+> На Windows используйте `127.0.0.1`, а не `localhost`: `localhost` резолвится в
+> IPv6 (`::1`), и проброс порта Docker Desktop по IPv6 иногда зависает — тогда
+> подключение к БД «висит» без ошибки. `127.0.0.1` форсит IPv4 и работает стабильно.
 
 Полезное:
 

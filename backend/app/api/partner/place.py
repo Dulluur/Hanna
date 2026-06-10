@@ -44,7 +44,7 @@ async def update_my_place(
 ) -> PlaceDetail:
     place = await _load_my_place(db, user)
 
-    scalar_fields = {"description", "work_hours", "photo_url", "phone", "website", "upsell_highlights"}
+    scalar_fields = {"description", "work_hours", "photo_url", "photos", "phone", "website", "upsell_highlights"}
     payload = body.model_dump(exclude_unset=True)
     for field in scalar_fields & payload.keys():
         setattr(place, field, payload[field])

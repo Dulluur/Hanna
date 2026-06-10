@@ -3,16 +3,8 @@ import type { MouseEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useFavoritesStore } from '@/store/favorites'
 
-// Окно, в течение которого второй клик считается двойным. Одиночный клик
-// (переход на карточку) выполняется с этой задержкой — иначе первый клик из
-// «двойного» успел бы увести на страницу до того, как придёт второй.
 const DOUBLE_CLICK_MS = 250
 
-/**
- * Поведение «как в Instagram»: двойной клик/тап по карточке переключает лайк
- * (добавляет в маршрут или снимает) и проигрывает анимацию-всплеск при
- * добавлении; одиночный клик по-прежнему открывает карточку.
- */
 export function useDoubleTapLike(
   kind: 'place' | 'event',
   id: number,

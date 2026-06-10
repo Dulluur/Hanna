@@ -5,12 +5,7 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App.tsx'
 import './index.css'
 
-/**
- * Один общий QueryClient на всё приложение.
- * Дефолты подобраны для витрины: данные считаем "свежими" минуту
- * (за это время пользователь обычно успевает посмотреть несколько карточек),
- * а при возврате на вкладку лишний раз не дёргаем сервер.
- */
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

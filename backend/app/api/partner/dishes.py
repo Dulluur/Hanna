@@ -11,11 +11,6 @@ from app.database import get_session
 from app.models import PlaceTopDish, User
 from app.schemas import PlaceTopDishCreate, PlaceTopDishRead, PlaceTopDishUpdate
 
-"""
-dishes.py - «топ-блюда» заведения (то что показывается на витрине: «попробуй вот это»).
-Полный CRUD: список / создать / обновить / удалить. Хелпер _load_my_dish следит чтобы партнёр не залез в чужие блюда (проверяет dish.place_id == user.place_id). Порядок задаётся полем sort_order.
-"""
-
 
 router = APIRouter(prefix="/api/partner/dishes", tags=["partner:dishes"])
 

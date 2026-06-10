@@ -5,6 +5,7 @@ import { fetchMyPlace, updateMyPlace, type PlaceUpdate } from '@/api/partner'
 import { fetchReferences } from '@/api/references'
 import { MultiChips } from '@/components/FilterChips'
 import { HighlightsField } from '@/components/HighlightsField'
+import { ImageGalleryField } from '@/components/ImageGalleryField'
 import { ImageUploadField } from '@/components/ImageUploadField'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -33,6 +34,7 @@ export function InfoPage() {
       setDraft({
         description: place.description ?? '',
         photo_url: place.photo_url ?? '',
+        photos: place.photos ?? [],
         phone: place.phone ?? '',
         website: place.website ?? '',
         upsell_highlights: place.upsell_highlights ?? [],
@@ -127,6 +129,12 @@ export function InfoPage() {
           value={(draft.photo_url as string) ?? ''}
           onChange={(url) => setDraft({ ...draft, photo_url: url })}
           previewClassName="aspect-[16/9] w-full max-w-md"
+        />
+
+        <ImageGalleryField
+          label="Дополнительные фото"
+          value={draft.photos ?? []}
+          onChange={(urls) => setDraft({ ...draft, photos: urls })}
         />
 
         <div className="block">

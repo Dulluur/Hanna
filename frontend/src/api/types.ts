@@ -71,6 +71,7 @@ export interface PlaceListItem{
 export interface PlaceDetail extends PlaceListItem{
   description: string | null
   work_hours: Record<string, unknown> | string | null
+  photos: string[]
   phone: string | null
   website: string | null
   upsell_highlights: string[]
@@ -116,6 +117,7 @@ export interface EventListItem{
 
 export interface EventDetail extends EventListItem{
   description: string | null
+  photos: string[]
   is_active: boolean
   created_at: string
   updated_at: string

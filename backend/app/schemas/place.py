@@ -52,6 +52,7 @@ class PlaceListItem(BaseModel):
 class PlaceDetail(PlaceListItem):
     description: str | None = None
     work_hours: dict[str, Any] | str | None = None
+    photos: list[str] = []
     phone: str | None = None
     website: str | None = None
     upsell_highlights: list[str] = []
@@ -94,6 +95,7 @@ class PlaceUpdate(BaseModel):
     description: str | None = None
     work_hours: dict[str, Any] | str | None = None
     photo_url: str | None = None
+    photos: list[str] | None = None
     phone: str | None = None
     website: str | None = None
     upsell_highlights: list[str] | None = None
@@ -102,13 +104,23 @@ class PlaceUpdate(BaseModel):
     diet_tags: list[str] | None = None
     amenities: list[str] | None = None
 
+    @field_validator("photos")
+    @classmethod
+    def _clean_photos(cls, value: list[str] | None) -> list[str] | None:
+        if value is None:
+            return None
+        cleaned: list[str] = []
+        seen: set[str] = set()
+        for url in value:
+            u = url.strip()
+            if u and u not in seen:
+                seen.add(u)
+                cleaned.append(u)
+        return cleaned
+
     @field_validator("website")
     @classmethod
     def _validate_website(cls, value: str | None) -> str | None:
-        # Главная граница безопасности: фронтовый normalizeUrl можно обойти
-        # прямым запросом к API или через админку. Пускаем только http/https,
-        # режем javascript:/data:/прочее — иначе ссылка уедет в href и станет
-        # вектором для XSS/фишинга у гостей.
         if value is None:
             return None
         url = value.strip()

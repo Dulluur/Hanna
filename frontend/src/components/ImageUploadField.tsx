@@ -1,24 +1,7 @@
 import { useId, useRef, useState } from 'react'
 import { ImagePlus, Trash2 } from 'lucide-react'
-import heic2any from 'heic2any'
-import { uploadImage } from '@/api/partner'
+import { IMAGE_ACCEPT, uploadImageFile } from '@/lib/image'
 import { Button } from '@/components/ui/button'
-
-
-async function maybeConvertHeic(file: File): Promise<File> {
-  const name = file.name.toLowerCase()
-  const isHeic =
-    file.type === 'image/heic' ||
-    file.type === 'image/heif' ||
-    name.endsWith('.heic') ||
-    name.endsWith('.heif')
-  if (!isHeic) return file
-
-  const converted = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.9 })
-  const blob = Array.isArray(converted) ? converted[0] : converted
-  const newName = file.name.replace(/\.(heic|heif)$/i, '.jpg')
-  return new File([blob], newName, { type: 'image/jpeg' })
-}
 
 
 interface Props {
@@ -27,9 +10,6 @@ interface Props {
   label?: string
   previewClassName?: string
 }
-
-
-const MAX_BYTES = 5 * 1024 * 1024
 
 
 export function ImageUploadField({
@@ -45,20 +25,15 @@ export function ImageUploadField({
 
   async function handleFile(file: File) {
     setError(null)
-    if (file.size > MAX_BYTES) {
-      setError(`Файл слишком большой - максимум ${MAX_BYTES / (1024 * 1024)} МБ`)
-      return
-    }
     setUploading(true)
     try {
-      const prepared = await maybeConvertHeic(file)
-      const url = await uploadImage(prepared)
+      const url = await uploadImageFile(file)
       onChange(url)
     } catch (e) {
       const detail = (
         e as { response?: { data?: { detail?: string } } } | null
       )?.response?.data?.detail
-      setError(detail ?? 'Не удалось загрузить файл')
+      setError(detail ?? (e as Error)?.message ?? 'Не удалось загрузить файл')
     } finally {
       setUploading(false)
       if (inputRef.current) inputRef.current.value = ''
@@ -100,7 +75,7 @@ export function ImageUploadField({
             ref={inputRef}
             id={inputId}
             type="file"
-            accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.jpg,.jpeg,.png,.webp,.heic,.heif"
+            accept={IMAGE_ACCEPT}
             disabled={uploading}
             onChange={(e) => {
               const file = e.target.files?.[0]

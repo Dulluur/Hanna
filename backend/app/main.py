@@ -12,6 +12,7 @@ from app.api import places as places_api
 from app.api import references as references_api
 from app.api.partner import dishes as partner_dishes_api
 from app.api.partner import events as partner_events_api
+from app.api.partner import metrics as partner_metrics_api
 from app.api.partner import place as partner_place_api
 from app.api.partner import uploads as partner_uploads_api
 from app.auth import routes as auth_routes
@@ -38,6 +39,7 @@ app.include_router(partner_place_api.router)
 app.include_router(partner_dishes_api.router)
 app.include_router(partner_events_api.router)
 app.include_router(partner_uploads_api.router)
+app.include_router(partner_metrics_api.router)
 
 
 _UPLOADS_DIR = Path("./uploads").resolve()

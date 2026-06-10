@@ -12,6 +12,7 @@ export interface PlaceUpdate{
   description?: string | null
   work_hours?: Record<string, unknown> | string | null
   photo_url?: string | null
+  photos?: string[] | null
   phone?: string | null
   website?: string | null
   upsell_highlights?: string[] | null
@@ -101,6 +102,7 @@ export interface EventCreate{
   ends_at?: string | null
   ticket_url?: string | null
   photo_url?: string | null
+  photos?: string[]
 }
 
 
@@ -114,6 +116,7 @@ export interface EventUpdate{
   ends_at?: string | null
   ticket_url?: string | null
   photo_url?: string | null
+  photos?: string[] | null
   is_active?: boolean
 }
 
@@ -136,4 +139,17 @@ Promise<EventDetail>{
 
 export async function deleteEvent(id: number): Promise<void>{
   await api.delete(`/api/partner/events/${id}`)
+}
+
+
+export interface PartnerMetrics{
+  period_days: number
+  actions: Record<string, number>
+  total: number
+}
+
+
+export async function fetchPartnerMetrics(): Promise<PartnerMetrics>{
+  const {data} = await api.get<PartnerMetrics>('/api/partner/metrics/me')
+  return data
 }

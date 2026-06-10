@@ -23,6 +23,7 @@ class EventListItem(BaseModel):
 
 class EventDetail(EventListItem):
     description: str | None = None
+    photos: list[str] = []
     is_active: bool
     created_at: datetime
     updated_at: datetime
@@ -50,6 +51,7 @@ class EventCreate(BaseModel):
     ends_at: datetime | None = None
     ticket_url: str | None = None
     photo_url: str | None = None
+    photos: list[str] = Field(default_factory=list)
 
 class EventUpdate(BaseModel):
     title: str | None = Field(default=None, min_length=1, max_length=300)
@@ -61,4 +63,5 @@ class EventUpdate(BaseModel):
     ends_at: datetime | None = None
     ticket_url: str | None = None
     photo_url: str | None = None
+    photos: list[str] | None = None
     is_active: bool | None = None

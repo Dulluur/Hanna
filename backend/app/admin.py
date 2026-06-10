@@ -141,7 +141,6 @@ class PlaceAdmin(ModelView, model=Place):
     form_excluded_columns = [Place.created_at, Place.updated_at, Place.top_dishes]
 
     form_args = {
-        # Координаты вводятся вручную двумя полями. Валидируем диапазон на форме.
         "latitude": {
             "validators": [NumberRange(min=-90, max=90, message="Широта должна быть от -90 до 90")],
         },
@@ -160,9 +159,6 @@ class PlaceAdmin(ModelView, model=Place):
             "widget": _UnstyledList(prefix_label=False),
             "option_widget": _CompactCheckbox(),
         },
-        # work_hours — JSONB. sqladmin рисует JSON-редактор; без подсказки
-        # непонятно, какой объект вводить. Формат «день: часы» — его же ждёт
-        # фронтовый formatWorkHours (MapPage.tsx).
         "work_hours": {
             "label": "Часы работы",
             "description": (

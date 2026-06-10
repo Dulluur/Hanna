@@ -24,7 +24,10 @@ dev-dist/
 *.log
 
 # загруженные пользователями файлы (живут в volume, не в git)
-uploads/
+uploads/*
+# …кроме демо-фото сидов: Unsplash забанен в РФ, заново их не скачать,
+# поэтому локализованные WebP коммитим в репозиторий.
+!uploads/seed/
 
 # IDE
 .idea/
@@ -33,3 +36,6 @@ uploads/
 
 # alembic
 backend/alembic/versions/__pycache__/
+
+
+*.md
