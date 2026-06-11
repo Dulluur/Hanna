@@ -51,9 +51,9 @@ export function PlacesPage() {
               </p>
             ) : (
               <ul className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
-                {data.items.map((place) => (
+                {data.items.map((place, index) => (
                   <li key={place.id}>
-                    <PlaceCard place={place} />
+                    <PlaceCard place={place} priority={index < 3} />
                   </li>
                 ))}
               </ul>

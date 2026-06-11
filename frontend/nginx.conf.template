@@ -15,6 +15,7 @@ server {
 # HTTPS: SPA-статика + reverse-proxy на бэкенд (same-origin).
 server {
     listen 443 ssl;
+    http2 on;
     server_name ${DOMAIN};
 
     ssl_certificate     /etc/letsencrypt/live/${DOMAIN}/fullchain.pem;
@@ -27,8 +28,20 @@ server {
     gzip on;
     gzip_types text/css application/javascript application/json image/svg+xml;
 
-    # Бэкенд FastAPI: API, авторизация, загруженные фото, админка, healthcheck.
-    location ~ ^/(api|auth|uploads|admin|health) {
+    # Загруженные и демо-фото: имена стабильны (uuid / seed), поэтому кэшируем
+    # надолго. Этот блок идёт ПЕРЕД общим прокси, чтобы перехватить /uploads.
+    location ~ ^/uploads/ {
+        proxy_pass http://backend:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        expires 30d;
+        add_header Cache-Control "public";
+    }
+
+    # Бэкенд FastAPI: API, авторизация, админка, healthcheck (без кэша).
+    location ~ ^/(api|auth|admin|health) {
         proxy_pass http://backend:8000;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
@@ -39,6 +52,14 @@ server {
     # SPA: статика с фолбэком на index.html (клиентский роутинг).
     root /usr/share/nginx/html;
     index index.html;
+
+    # Ассеты Vite содержат хэш в имени → неизменяемы, кэшируем на год.
+    location /assets/ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        try_files $uri =404;
+    }
+
     location / {
         try_files $uri $uri/ /index.html;
     }

@@ -17,10 +17,11 @@ interface Props {
     deltaRub: number
     reasons: string[]
   }
+  priority?: boolean
 }
 
 
-export function PlaceCard({ place, upsell }: Props) {
+export function PlaceCard({ place, upsell, priority = false }: Props) {
   const rating = place.rating_2gis ? Number(place.rating_2gis) : null
   const { onClick, burst, onBurstEnd } = useDoubleTapLike(
     'place',
@@ -47,7 +48,8 @@ export function PlaceCard({ place, upsell }: Props) {
             src={place.photo_url}
             alt={place.name}
             className="aspect-[16/9] w-full object-cover"
-            loading="lazy"
+            loading={priority ? 'eager' : 'lazy'}
+            fetchPriority={priority ? 'high' : 'auto'}
           />
         ) : (
           <ImagePlaceholder
