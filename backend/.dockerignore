@@ -4,4 +4,7 @@ __pycache__
 .pytest_cache
 .mypy_cache
 .ruff_cache
-uploads
+# Загруженные пользователями фото исключаем, но seed-фото (демо) нужны в образе,
+# чтобы они попали в том uploads при первом создании.
+uploads/*
+!uploads/seed/
