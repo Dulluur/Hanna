@@ -11,6 +11,7 @@ dependencies = [
   "alembic>=1.13",
   "pydantic-settings>=2.3",
   "sqladmin>=0.18",
+  "wtforms<3.2",
   "passlib[bcrypt]>=1.7",
   "itsdangerous>=2.2",
   "python-multipart>=0.0.9",
